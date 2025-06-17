@@ -26,7 +26,8 @@ import {
   LucideProps,
   Database,
   BarChart2,
-  Key
+  Key,
+  Download
 } from 'lucide-react';
 
 // === CONFIGURATION: Add your scheduling link here ===
@@ -35,24 +36,23 @@ const schedulingLink = "https://zcal.co/rohanvyas/15min";
 // Custom CSS for fancy effects
 const FancyStyles: FC = () => (
     <style>{`
-      @keyframes aurora {
-        0% { transform: translate(-50%, -50%) rotate(0deg) scale(1.5); }
-        50% { transform: translate(-50%, -50%) rotate(180deg) scale(1.6); }
-        100% { transform: translate(-50%, -50%) rotate(360deg) scale(1.5); }
+      /* Sales Funnel Pulse Animation */
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+          box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.7);
+        }
+        70% {
+          transform: scale(1.05);
+          box-shadow: 0 0 10px 20px rgba(79, 70, 229, 0);
+        }
+        100% {
+          transform: scale(1);
+          box-shadow: 0 0 0 0 rgba(79, 70, 229, 0);
+        }
       }
-      .aurora-bg {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 140vw;
-        height: 140vw;
-        max-width: 1200px;
-        max-height: 1200px;
-        background: conic-gradient(from 90deg at 50% 50%, #4f46e5 0%, #14b8a6 25%, #4f46e5 50%, #ec4899 75%, #4f46e5 100%);
-        filter: blur(120px);
-        opacity: 0.15;
-        animation: aurora 30s linear infinite;
-        z-index: 0;
+      .pulse-node {
+        animation: pulse 2s infinite;
       }
     `}</style>
   );
@@ -109,20 +109,31 @@ const AnimatedWrapper: FC<AnimatedWrapperProps> = ({ children, className = '', d
 
 // Main App Component
 const App: FC = () => {
+  const [page, setPage] = useState('home');
+
+  const navigateTo = (pageName: string) => {
+      setPage(pageName);
+      window.scrollTo(0,0);
+  }
+
   return (
     <>
       <FancyStyles />
-      <div className="min-h-screen bg-[#111827] text-gray-300 font-sans leading-relaxed relative overflow-hidden">
-        <div className="aurora-bg"></div>
-        <Header />
+      <div className="min-h-screen bg-[#111827] text-gray-300 font-sans leading-relaxed relative overflow-x-hidden">
+        <Header navigateTo={navigateTo} />
         <main className="relative z-10">
-          <Hero />
-          <Problem />
-          <Solution />
-          <Services />
-          <Process />
-          <FoundationalPartners />
-          <CTA />
+          {page === 'home' && (
+            <>
+              <Hero />
+              <Problem />
+              <Solution />
+              <Services />
+              <Process />
+              <FoundationalPartners />
+              <CTA />
+            </>
+          )}
+          {page === 'resources' && <ResourcesPage />}
         </main>
         <Footer />
       </div>
@@ -134,7 +145,11 @@ const App: FC = () => {
 // SUB-COMPONENTS
 // =================================
 
-const Header: FC = () => {
+interface HeaderProps {
+    navigateTo: (pageName: string) => void;
+}
+
+const Header: FC<HeaderProps> = ({ navigateTo }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -147,9 +162,24 @@ const Header: FC = () => {
   }, []);
 
   const navLinks = [
-    { href: '#services', label: 'Services' },
-    { href: '#process', label: 'Process' },
+    { href: '#services', label: 'Services', page: 'home' },
+    { href: '#process', label: 'Process', page: 'home' },
+    { href: '#resources', label: 'Resources', page: 'resources' },
   ];
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, page: string, href: string) => {
+      e.preventDefault();
+      if (page === 'resources') {
+          navigateTo('resources');
+      } else {
+          navigateTo('home');
+          // Smooth scroll for anchor links on home page
+          setTimeout(() => {
+              document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+          }, 0);
+      }
+      setIsMenuOpen(false);
+  }
 
   return (
     <header className={`fixed w-full z-50 transition-all duration-300 ${
@@ -159,7 +189,7 @@ const Header: FC = () => {
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          <a href="#" className="flex items-center space-x-3">
+          <a href="#" onClick={(e) => handleNavClick(e, 'home', '#')} className="flex items-center space-x-3">
             <div className="bg-gradient-to-br from-indigo-500 to-teal-500 p-2 rounded-lg shadow-lg">
               <Zap className="h-6 w-6 text-white" />
             </div>
@@ -171,14 +201,14 @@ const Header: FC = () => {
           <div className="hidden md:flex items-center space-x-6">
             <nav className="flex space-x-6">
               {navLinks.map(link => (
-                <a key={link.href} href={link.href} className="text-gray-300 hover:text-white transition-colors font-medium">
+                <a key={link.href} href={link.href} onClick={(e) => handleNavClick(e, link.page, link.href)} className="text-gray-300 hover:text-white transition-colors font-medium">
                   {link.label}
                 </a>
               ))}
             </nav>
             <a href={schedulingLink} target="_blank" rel="noopener noreferrer">
                 <button className="bg-indigo-600 text-white px-5 py-2.5 rounded-lg hover:bg-indigo-700 transition-colors shadow-sm font-semibold">
-                   Book a Strategy Call
+                    Book a Strategy Call
                 </button>
             </a>
           </div>
@@ -195,14 +225,14 @@ const Header: FC = () => {
           <div className="md:hidden bg-[#111827]/95 backdrop-blur-md border-t border-gray-700/50">
             <div className="px-4 pt-2 pb-4 space-y-1">
               {navLinks.map(link => (
-                 <a key={link.href} href={link.href} className="block px-3 py-2 text-gray-300 hover:text-white hover:bg-gray-800 rounded-lg transition-colors">{link.label}</a>
+                   <a key={link.href} href={link.href} onClick={(e) => handleNavClick(e, link.page, link.href)} className="block px-3 py-2 text-gray-300 hover:text-white hover:bg-gray-800 rounded-lg transition-colors">{link.label}</a>
               ))}
                <div className="border-t border-gray-700/50 pt-4 mt-2">
-                <a href={schedulingLink} target="_blank" rel="noopener noreferrer" className="w-full">
-                    <button className="w-full bg-indigo-600 text-white px-5 py-2.5 rounded-lg hover:bg-indigo-700 transition-colors shadow-sm font-semibold">
-                        Book a Strategy Call
-                    </button>
-                </a>
+                 <a href={schedulingLink} target="_blank" rel="noopener noreferrer" className="w-full">
+                     <button className="w-full bg-indigo-600 text-white px-5 py-2.5 rounded-lg hover:bg-indigo-700 transition-colors shadow-sm font-semibold">
+                         Book a Strategy Call
+                     </button>
+                 </a>
                </div>
             </div>
           </div>
@@ -212,113 +242,168 @@ const Header: FC = () => {
   );
 };
 
-const ThreeCanvas: FC = () => {
-    const mountRef = useRef<HTMLDivElement>(null);
+// Flowing geometric grid animation
+const GeometricFlowCanvas: FC = () => {
+    const canvasRef = useRef<HTMLCanvasElement>(null);
 
     useEffect(() => {
-        if (typeof THREE === 'undefined') return;
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
 
-        const currentMount = mountRef.current;
-        if (!currentMount) return;
-
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(75, currentMount.clientWidth / currentMount.clientHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        renderer.setSize(currentMount.clientWidth, currentMount.clientHeight);
-        currentMount.appendChild(renderer.domElement);
-
-        camera.position.z = 5;
-
-        const particleCount = 5000;
-        const positions = new Float32Array(particleCount * 3);
-        const colors = new Float32Array(particleCount * 3);
-
-        const color1 = new THREE.Color("#4f46e5"); // Indigo
-        const color2 = new THREE.Color("#14b8a6"); // Teal
-
-        for (let i = 0; i < particleCount; i++) {
-            const i3 = i * 3;
-            positions[i3] = (Math.random() - 0.5) * 10;
-            positions[i3 + 1] = (Math.random() - 0.5) * 10;
-            positions[i3 + 2] = (Math.random() - 0.5) * 10;
-
-            const mixedColor = color1.clone().lerp(color2, Math.random());
-            colors[i3] = mixedColor.r;
-            colors[i3 + 1] = mixedColor.g;
-            colors[i3 + 2] = mixedColor.b;
-        }
-
-        const geometry = new THREE.BufferGeometry();
-        geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-        geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
-        const material = new THREE.PointsMaterial({
-            size: 0.02,
-            vertexColors: true,
-            blending: THREE.AdditiveBlending,
-            transparent: true,
-        });
-
-        const particles = new THREE.Points(geometry, material);
-        scene.add(particles);
-
-        const mouse = new THREE.Vector2();
-        const onMouseMove = (event: MouseEvent) => {
-            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-            mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+        let animationFrameId: number;
+        let time = 0;
+        const speed = 0.005;
+        
+        const resizeCanvas = () => {
+            if (canvas.parentElement) {
+                canvas.width = canvas.parentElement.clientWidth;
+                canvas.height = canvas.parentElement.clientHeight;
+            }
         };
-        window.addEventListener('mousemove', onMouseMove);
+
+        const draw = () => {
+            if(!ctx) return;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            const gridSize = 40;
+            const amplitude = 30;
+            const frequency = 0.02;
+
+            const gradient = ctx.createLinearGradient(0, canvas.height/2, canvas.width, canvas.height/2);
+            gradient.addColorStop(0, '#4f46e5'); // Indigo
+            gradient.addColorStop(0.5, '#14b8a6'); // Teal
+            gradient.addColorStop(1, '#ec4899'); // Pink
+
+            ctx.strokeStyle = gradient;
+            ctx.lineWidth = 1;
+
+            for (let i = 0; i < canvas.width / gridSize + 1; i++) {
+                ctx.beginPath();
+                for (let j = 0; j < canvas.height / gridSize + 1; j++) {
+                    const x = i * gridSize;
+                    const y = j * gridSize + Math.sin(i * frequency + time) * amplitude * Math.sin(j * 0.1 + time);
+                    if (j === 0) {
+                        ctx.moveTo(x, y);
+                    } else {
+                        ctx.lineTo(x, y);
+                    }
+                }
+                ctx.stroke();
+            }
+
+            for (let j = 0; j < canvas.height / gridSize + 1; j++) {
+                ctx.beginPath();
+                for (let i = 0; i < canvas.width / gridSize + 1; i++) {
+                    const x = i * gridSize;
+                    const y = j * gridSize + Math.sin(i * frequency + time) * amplitude * Math.sin(j * 0.1 + time);
+                    if (i === 0) {
+                        ctx.moveTo(x, y);
+                    } else {
+                        ctx.lineTo(x, y);
+                    }
+                }
+                ctx.stroke();
+            }
+        };
 
         const animate = () => {
-            requestAnimationFrame(animate);
-            particles.rotation.y += 0.0005 + (mouse.x * 0.001);
-            particles.rotation.x += 0.0005 + (mouse.y * 0.001);
-            renderer.render(scene, camera);
+            time += speed;
+            draw();
+            animationFrameId = requestAnimationFrame(animate);
         };
+        
+        resizeCanvas();
         animate();
-
-        const handleResize = () => {
-            if (currentMount) {
-                camera.aspect = currentMount.clientWidth / currentMount.clientHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(currentMount.clientWidth, currentMount.clientHeight);
-            }
-        };
-        window.addEventListener('resize', handleResize);
+        
+        window.addEventListener('resize', resizeCanvas);
 
         return () => {
-            window.removeEventListener('mousemove', onMouseMove);
-            window.removeEventListener('resize', handleResize);
-            if (currentMount) {
-                currentMount.removeChild(renderer.domElement);
-            }
+            window.removeEventListener('resize', resizeCanvas);
+            cancelAnimationFrame(animationFrameId);
         };
     }, []);
 
-    return <div ref={mountRef} className="absolute inset-0 z-0" />;
+    return <canvas ref={canvasRef} className="absolute inset-0 z-0 opacity-20 w-full h-full" />;
+};
+
+
+// --- SALES FUNNEL COMPONENT ---
+const SalesFunnel: FC = () => {
+    const [activeStage, setActiveStage] = useState<string | null>(null);
+
+    const stages = [
+        { name: 'Leads', icon: Users },
+        { name: 'Prospects', icon: Search },
+        { name: 'Qualified Calls', icon: Calendar },
+        { name: 'Deals Closed', icon: Award },
+    ];
+
+    return (
+        <div className="w-full flex flex-col items-center justify-center p-4 space-y-2">
+            {stages.map((stage, index) => {
+                const isPulsing = stage.name === 'Qualified Calls';
+                const isActive = activeStage === stage.name || isPulsing;
+                const Icon = stage.icon;
+
+                return (
+                    <React.Fragment key={stage.name}>
+                        <div
+                            onMouseEnter={() => setActiveStage(stage.name)}
+                            onMouseLeave={() => setActiveStage(null)}
+                            className={`flex items-center p-4 rounded-lg transition-all duration-300 w-full max-w-xs
+                                ${isActive ? 'bg-indigo-600/30 backdrop-blur-sm' : 'bg-gray-800/20'}`}
+                        >
+                            <div className={`
+                                p-3 rounded-full mr-4 transition-all duration-300 
+                                ${isPulsing ? 'pulse-node' : ''}
+                                ${isActive ? 'bg-indigo-500' : 'bg-gray-700'}`
+                            }>
+                                <Icon className={`h-6 w-6 ${isActive ? 'text-white' : 'text-gray-400'}`} />
+                            </div>
+                            <span className={`font-semibold text-lg ${isActive ? 'text-white' : 'text-gray-400'}`}>
+                                {stage.name}
+                            </span>
+                        </div>
+                        {index < stages.length - 1 && (
+                            <div className="h-8 w-px bg-gray-700" />
+                        )}
+                    </React.Fragment>
+                );
+            })}
+        </div>
+    );
 };
 
 
 const Hero: FC = () => {
     return (
-      <section className="min-h-screen flex items-center justify-center bg-transparent relative overflow-hidden">
-        <ThreeCanvas />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-center text-center">
-            <div className="relative z-10">
-                <AnimatedWrapper>
-                  <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
-                    Never Run Out Of<br/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-teal-400">Qualified Sales Calls</span>
-                  </h1>
-                  <p className="text-lg md:text-xl text-gray-400 mb-10 max-w-2xl mx-auto">
-                    We build a world-class outbound system that books your calendar with high-value prospects, so you can focus on closing deals.
-                  </p>
-                  <a href={schedulingLink} target="_blank" rel="noopener noreferrer" className="inline-block">
-                    <button className="group bg-indigo-600 text-white px-8 py-4 rounded-lg hover:bg-indigo-700 transition-all transform hover:scale-105 inline-flex items-center justify-center text-lg font-semibold shadow-lg shadow-indigo-500/30">
-                        Book Your Strategy Call
-                        <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                    </button>
-                  </a>
-                </AnimatedWrapper>
+      <section className="min-h-screen flex items-center justify-center pt-20 lg:pt-0">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div className="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
+                <div className="text-center lg:text-left z-10 relative">
+                    <AnimatedWrapper>
+                      <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                        Never Run Out Of<br/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-teal-400">Qualified Sales Calls</span>
+                      </h1>
+                      <p className="text-lg md:text-xl text-gray-400 mb-10 max-w-xl mx-auto lg:mx-0">
+                        We build a world-class outbound system that books your calendar with high-value prospects, so you can focus on closing deals.
+                      </p>
+                      <a href={schedulingLink} target="_blank" rel="noopener noreferrer" className="inline-block">
+                        <button className="group bg-indigo-600 text-white px-8 py-4 rounded-lg hover:bg-indigo-700 transition-all transform hover:scale-105 inline-flex items-center justify-center text-lg font-semibold shadow-lg shadow-indigo-500/30">
+                            Book Your Strategy Call
+                            <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                        </button>
+                      </a>
+                    </AnimatedWrapper>
+                </div>
+                <div className="relative h-96 lg:h-[500px] mt-16 lg:mt-0 flex items-center justify-center">
+                    <GeometricFlowCanvas />
+                    <div className="relative z-10 w-full">
+                       <SalesFunnel />
+                    </div>
+                </div>
             </div>
         </div>
       </section>
@@ -346,18 +431,21 @@ const Problem: FC = () => {
           </AnimatedWrapper>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {problems.map((problem, index) => (
-              <AnimatedWrapper key={index} delay={index * 100}>
-                <div className="group bg-gray-800/50 backdrop-blur-xl p-6 rounded-2xl shadow-lg transition-all duration-300 border border-gray-700/80 hover:border-indigo-500/50 hover:-translate-y-2 h-full text-center">
-                  <div className="inline-flex bg-gradient-to-br from-indigo-500 to-teal-500 p-3 rounded-xl mb-4 shadow-lg shadow-indigo-500/20">
-                    <problem.icon className="h-8 w-8 text-white" />
-                  </div>
-                  <h3 className="text-xl font-semibold text-white">
-                    {problem.title}
-                  </h3>
-                </div>
-              </AnimatedWrapper>
-            ))}
+            {problems.map((problem, index) => {
+                const Icon = problem.icon;
+                return (
+                  <AnimatedWrapper key={index} delay={index * 100}>
+                    <div className="group bg-gray-800/50 backdrop-blur-xl p-6 rounded-2xl shadow-lg transition-all duration-300 border border-gray-700/80 hover:border-indigo-500/50 hover:-translate-y-2 h-full text-center">
+                      <div className="inline-flex bg-gradient-to-br from-indigo-500 to-teal-500 p-3 rounded-xl mb-4 shadow-lg shadow-indigo-500/20">
+                        <Icon className="h-8 w-8 text-white" />
+                      </div>
+                      <h3 className="text-xl font-semibold text-white">
+                        {problem.title}
+                      </h3>
+                    </div>
+                  </AnimatedWrapper>
+                )
+            })}
           </div>
         </div>
       </section>
@@ -407,21 +495,24 @@ const Solution: FC = () => {
                 </p>
                 
                 <div className="space-y-6">
-                {benefits.map((benefit, index) => (
-                    <div key={index} className="flex items-start space-x-4 group">
-                    <div className="bg-gradient-to-br from-indigo-500 to-teal-500 p-3 rounded-xl flex-shrink-0 border border-gray-700">
-                        <benefit.icon className="h-6 w-6 text-white" />
-                    </div>
-                    <div>
-                        <h3 className="text-lg font-semibold text-white mb-1">
-                        {benefit.title}
-                        </h3>
-                        <p className="text-gray-400">
-                        {benefit.description}
-                        </p>
-                    </div>
-                    </div>
-                ))}
+                {benefits.map((benefit, index) => {
+                    const Icon = benefit.icon;
+                    return (
+                        <div key={index} className="flex items-start space-x-4 group">
+                            <div className="bg-gradient-to-br from-indigo-500 to-teal-500 p-3 rounded-xl flex-shrink-0 border border-gray-700">
+                                <Icon className="h-6 w-6 text-white" />
+                            </div>
+                            <div>
+                                <h3 className="text-lg font-semibold text-white mb-1">
+                                {benefit.title}
+                                </h3>
+                                <p className="text-gray-400">
+                                {benefit.description}
+                                </p>
+                            </div>
+                        </div>
+                    )
+                })}
                 </div>
             </AnimatedWrapper>
           
@@ -508,21 +599,24 @@ const Services: FC = () => {
         </AnimatedWrapper>
         
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service, index) => (
-            <AnimatedWrapper key={index} delay={index * 100}>
-              <div className="group bg-gray-800/50 backdrop-blur-xl p-8 rounded-2xl shadow-lg transition-all duration-300 border border-gray-700/80 hover:border-indigo-500/50 transform hover:-translate-y-2 h-full flex flex-col">
-                <div className="bg-gradient-to-br from-indigo-500 to-teal-500 p-3 rounded-xl w-fit mb-6 shadow-lg shadow-indigo-500/20">
-                  <service.icon className="h-6 w-6 text-white" />
-                </div>
-                <h3 className="text-xl font-semibold text-white mb-3">
-                  {service.title}
-                </h3>
-                <p className="text-gray-400 leading-relaxed flex-grow">
-                  {service.description}
-                </p>
-              </div>
-            </AnimatedWrapper>
-          ))}
+          {services.map((service, index) => {
+            const Icon = service.icon;
+            return (
+                <AnimatedWrapper key={index} delay={index * 100}>
+                  <div className="group bg-gray-800/50 backdrop-blur-xl p-8 rounded-2xl shadow-lg transition-all duration-300 border border-gray-700/80 hover:border-indigo-500/50 transform hover:-translate-y-2 h-full flex flex-col">
+                    <div className="bg-gradient-to-br from-indigo-500 to-teal-500 p-3 rounded-xl w-fit mb-6 shadow-lg shadow-indigo-500/20">
+                      <Icon className="h-6 w-6 text-white" />
+                    </div>
+                    <h3 className="text-xl font-semibold text-white mb-3">
+                      {service.title}
+                    </h3>
+                    <p className="text-gray-400 leading-relaxed flex-grow">
+                      {service.description}
+                    </p>
+                  </div>
+                </AnimatedWrapper>
+            )
+          })}
         </div>
       </div>
     </section>
@@ -566,25 +660,28 @@ const Process: FC = () => {
                 </AnimatedWrapper>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                    {steps.map((step, index) => (
-                        <AnimatedWrapper key={step.name} delay={index * 100}>
-                            <div className="group bg-gray-800/50 backdrop-blur-xl p-8 rounded-2xl shadow-lg transition-all duration-300 border border-gray-700/80 hover:border-indigo-500/50 hover:-translate-y-1 h-full">
-                                <div className="flex items-start justify-between">
-                                    <div className="bg-gradient-to-br from-indigo-500 to-teal-500 p-3 rounded-xl">
-                                        <step.icon className="h-8 w-8 text-white" />
+                    {steps.map((step, index) => {
+                        const Icon = step.icon;
+                        return (
+                            <AnimatedWrapper key={step.name} delay={index * 100}>
+                                <div className="group bg-gray-800/50 backdrop-blur-xl p-8 rounded-2xl shadow-lg transition-all duration-300 border border-gray-700/80 hover:border-indigo-500/50 hover:-translate-y-1 h-full">
+                                    <div className="flex items-start justify-between">
+                                        <div className="bg-gradient-to-br from-indigo-500 to-teal-500 p-3 rounded-xl">
+                                            <Icon className="h-8 w-8 text-white" />
+                                        </div>
+                                        <span className="text-sm font-bold text-gray-500">{step.name}</span>
                                     </div>
-                                    <span className="text-sm font-bold text-gray-500">{step.name}</span>
+                                    <p className="text-xl text-white font-medium mt-4">{step.description}</p>
                                 </div>
-                                <p className="text-xl text-white font-medium mt-4">{step.description}</p>
-                            </div>
-                        </AnimatedWrapper>
-                    ))}
+                            </AnimatedWrapper>
+                        )
+                    })}
                 </div>
                  <AnimatedWrapper delay={400}>
                      <div className="group bg-gray-800/50 backdrop-blur-xl p-8 rounded-2xl shadow-lg transition-all duration-300 border border-gray-700/80 hover:border-indigo-500/50 hover:-translate-y-1">
                          <div className="flex flex-col md:flex-row items-start md:items-center justify-between">
                              <div className="flex items-center mb-4 md:mb-0">
-                                <div className="bg-gradient-to-br from-indigo-500 to-teal-500 p-3 rounded-xl mr-4">
+                                 <div className="bg-gradient-to-br from-indigo-500 to-teal-500 p-3 rounded-xl mr-4">
                                      <Key className="h-8 w-8 text-white" />
                                  </div>
                                  <div>
@@ -593,9 +690,9 @@ const Process: FC = () => {
                                  </div>
                              </div>
                              <a href={schedulingLink} target="_blank" rel="noopener noreferrer" className="w-full md:w-auto">
-                                <button className="bg-indigo-600 text-white px-5 py-2.5 rounded-lg hover:bg-indigo-700 transition-colors shadow-sm font-semibold w-full md:w-auto mt-4 md:mt-0">
-                                    Become Self-Sufficient
-                                </button>
+                                 <button className="bg-indigo-600 text-white px-5 py-2.5 rounded-lg hover:bg-indigo-700 transition-colors shadow-sm font-semibold w-full md:w-auto mt-4 md:mt-0">
+                                     Become Self-Sufficient
+                                 </button>
                              </a>
                          </div>
                      </div>
@@ -604,6 +701,89 @@ const Process: FC = () => {
         </section>
     )
 };
+
+
+const ResourcesPage: FC = () => {
+    const resources = [
+        {
+            icon: FileText,
+            title: "Ultimate Cold Email Guide",
+            description: "A comprehensive guide to writing cold emails that actually get replies and book meetings.",
+            href: "#",
+        },
+        {
+            icon: Target,
+            title: "ICP & Prospecting Checklist",
+            description: "Define your Ideal Customer Profile and find high-quality leads with this step-by-step checklist.",
+            href: "#",
+        },
+        {
+            icon: Database,
+            title: "Lead Database Template",
+            description: "A free and simple template to organize your prospects and track your outreach efforts effectively.",
+            href: "#",
+        },
+         {
+            icon: Sparkles,
+            title: "Email Copywriting Formulas",
+            description: "Proven formulas to craft compelling email copy that converts readers into customers.",
+            href: "#",
+        },
+        {
+            icon: BarChart2,
+            title: "Sales Metrics Cheatsheet",
+            description: "Understand the key metrics to track for a successful outbound sales campaign.",
+            href: "#",
+        },
+        {
+            icon: Mail,
+            title: "Deliverability 101 Guide",
+            description: "Everything you need to know about email deliverability to avoid the spam folder.",
+            href: "#",
+        },
+    ];
+
+    return (
+        <section id="resources" className="py-24 pt-32 bg-[#111827]">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <AnimatedWrapper className="text-center mb-16">
+                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+                        Free Tools & Resources
+                    </h1>
+                    <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+                        Get a head start with these free resources, designed to help you improve your outbound sales process today.
+                    </p>
+                </AnimatedWrapper>
+
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {resources.map((resource, index) => {
+                        const Icon = resource.icon;
+                        return (
+                            <AnimatedWrapper key={index} delay={index * 100}>
+                                <div className="group bg-gray-800/50 backdrop-blur-xl p-8 rounded-2xl shadow-lg transition-all duration-300 border border-gray-700/80 hover:border-teal-500/50 transform hover:-translate-y-2 h-full flex flex-col">
+                                    <div className="bg-gradient-to-br from-indigo-500 to-teal-500 p-3 rounded-xl w-fit mb-6 shadow-lg shadow-indigo-500/20">
+                                        <Icon className="h-6 w-6 text-white" />
+                                    </div>
+                                    <h3 className="text-xl font-semibold text-white mb-3">
+                                        {resource.title}
+                                    </h3>
+                                    <p className="text-gray-400 leading-relaxed flex-grow mb-6">
+                                        {resource.description}
+                                    </p>
+                                    <a href={resource.href} className="flex items-center font-semibold text-teal-400 group-hover:text-teal-300 transition-colors">
+                                        Get the Resource
+                                        <Download className="ml-2 h-4 w-4" />
+                                    </a>
+                                </div>
+                            </AnimatedWrapper>
+                        );
+                    })}
+                </div>
+            </div>
+        </section>
+    );
+};
+
 
 const FoundationalPartners: FC = () => {
   return (
