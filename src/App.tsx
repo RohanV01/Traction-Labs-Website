@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef, FC, ReactNode } from 'react';
-import { 
-  Zap, 
-  Menu, 
-  X, 
-  ArrowRight, 
-  CheckCircle, 
-  Target, 
-  Users, 
-  GraduationCap, 
+import {
+  Zap,
+  Menu,
+  X,
+  ArrowRight,
+  CheckCircle,
+  Target,
+  Users,
+  GraduationCap,
   Search,
   MessageSquare,
   Calendar,
@@ -96,7 +96,7 @@ interface AnimatedWrapperProps {
 const AnimatedWrapper: FC<AnimatedWrapperProps> = ({ children, className = '', delay = 0 }) => {
     const [ref, isVisible] = useOnScreen({ threshold: 0.1 });
     return (
-        <div 
+        <div
             ref={ref}
             className={`${className} transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}
             style={{ transitionDelay: `${delay}ms` }}
@@ -109,20 +109,12 @@ const AnimatedWrapper: FC<AnimatedWrapperProps> = ({ children, className = '', d
 
 // Main App Component
 const App: FC = () => {
-  const [page, setPage] = useState('home');
-
-  const navigateTo = (pageName: string) => {
-      setPage(pageName);
-      window.scrollTo(0,0);
-  }
-
   return (
     <>
       <FancyStyles />
       <div className="min-h-screen bg-[#111827] text-gray-300 font-sans leading-relaxed relative overflow-x-hidden">
-        <Header navigateTo={navigateTo} />
+        <Header />
         <main className="relative z-10">
-          {page === 'home' && (
             <>
               <Hero />
               <Problem />
@@ -132,8 +124,6 @@ const App: FC = () => {
               <FoundationalPartners />
               <CTA />
             </>
-          )}
-          {page === 'resources' && <ResourcesPage />}
         </main>
         <Footer />
       </div>
@@ -145,11 +135,7 @@ const App: FC = () => {
 // SUB-COMPONENTS
 // =================================
 
-interface HeaderProps {
-    navigateTo: (pageName: string) => void;
-}
-
-const Header: FC<HeaderProps> = ({ navigateTo }) => {
+const Header: FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -162,34 +148,25 @@ const Header: FC<HeaderProps> = ({ navigateTo }) => {
   }, []);
 
   const navLinks = [
-    { href: '#services', label: 'Services', page: 'home' },
-    { href: '#process', label: 'Process', page: 'home' },
-    { href: '#resources', label: 'Resources', page: 'resources' },
+    { href: '#services', label: 'Services' },
+    { href: '#process', label: 'Process' },
   ];
 
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, page: string, href: string) => {
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
       e.preventDefault();
-      if (page === 'resources') {
-          navigateTo('resources');
-      } else {
-          navigateTo('home');
-          // Smooth scroll for anchor links on home page
-          setTimeout(() => {
-              document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
-          }, 0);
-      }
+      document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
       setIsMenuOpen(false);
   }
 
   return (
     <header className={`fixed w-full z-50 transition-all duration-300 ${
-      isScrolled 
-        ? 'bg-[#111827]/80 backdrop-blur-lg border-b border-gray-700/50' 
+      isScrolled
+        ? 'bg-[#111827]/80 backdrop-blur-lg border-b border-gray-700/50'
         : 'bg-transparent border-b border-transparent'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          <a href="#" onClick={(e) => handleNavClick(e, 'home', '#')} className="flex items-center space-x-3">
+          <a href="#" onClick={(e) => handleNavClick(e, '#')} className="flex items-center space-x-3">
             <div className="bg-gradient-to-br from-indigo-500 to-teal-500 p-2 rounded-lg shadow-lg">
               <Zap className="h-6 w-6 text-white" />
             </div>
@@ -197,11 +174,11 @@ const Header: FC<HeaderProps> = ({ navigateTo }) => {
               Traction Labs
             </span>
           </a>
-          
+
           <div className="hidden md:flex items-center space-x-6">
             <nav className="flex space-x-6">
               {navLinks.map(link => (
-                <a key={link.href} href={link.href} onClick={(e) => handleNavClick(e, link.page, link.href)} className="text-gray-300 hover:text-white transition-colors font-medium">
+                <a key={link.href} href={link.href} onClick={(e) => handleNavClick(e, link.href)} className="text-gray-300 hover:text-white transition-colors font-medium">
                   {link.label}
                 </a>
               ))}
@@ -213,7 +190,7 @@ const Header: FC<HeaderProps> = ({ navigateTo }) => {
             </a>
           </div>
 
-          <button 
+          <button
             className="md:hidden p-2 rounded-lg text-gray-300 hover:bg-gray-800 transition-colors"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
@@ -225,7 +202,7 @@ const Header: FC<HeaderProps> = ({ navigateTo }) => {
           <div className="md:hidden bg-[#111827]/95 backdrop-blur-md border-t border-gray-700/50">
             <div className="px-4 pt-2 pb-4 space-y-1">
               {navLinks.map(link => (
-                   <a key={link.href} href={link.href} onClick={(e) => handleNavClick(e, link.page, link.href)} className="block px-3 py-2 text-gray-300 hover:text-white hover:bg-gray-800 rounded-lg transition-colors">{link.label}</a>
+                   <a key={link.href} href={link.href} onClick={(e) => handleNavClick(e, link.href)} className="block px-3 py-2 text-gray-300 hover:text-white hover:bg-gray-800 rounded-lg transition-colors">{link.label}</a>
               ))}
                <div className="border-t border-gray-700/50 pt-4 mt-2">
                  <a href={schedulingLink} target="_blank" rel="noopener noreferrer" className="w-full">
@@ -255,7 +232,7 @@ const GeometricFlowCanvas: FC = () => {
         let animationFrameId: number;
         let time = 0;
         const speed = 0.005;
-        
+
         const resizeCanvas = () => {
             if (canvas.parentElement) {
                 canvas.width = canvas.parentElement.clientWidth;
@@ -266,7 +243,7 @@ const GeometricFlowCanvas: FC = () => {
         const draw = () => {
             if(!ctx) return;
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            
+
             const gridSize = 40;
             const amplitude = 30;
             const frequency = 0.02;
@@ -313,10 +290,10 @@ const GeometricFlowCanvas: FC = () => {
             draw();
             animationFrameId = requestAnimationFrame(animate);
         };
-        
+
         resizeCanvas();
         animate();
-        
+
         window.addEventListener('resize', resizeCanvas);
 
         return () => {
@@ -356,7 +333,7 @@ const SalesFunnel: FC = () => {
                                 ${isActive ? 'bg-indigo-600/30 backdrop-blur-sm' : 'bg-gray-800/20'}`}
                         >
                             <div className={`
-                                p-3 rounded-full mr-4 transition-all duration-300 
+                                p-3 rounded-full mr-4 transition-all duration-300
                                 ${isPulsing ? 'pulse-node' : ''}
                                 ${isActive ? 'bg-indigo-500' : 'bg-gray-700'}`
                             }>
@@ -417,7 +394,7 @@ const Problem: FC = () => {
       { icon: Clock, title: "Wasting Precious Time" },
       { icon: TrendingDown, title: "No Repeatable Process" },
     ];
-  
+
     return (
       <section className="py-20 bg-transparent">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -429,7 +406,7 @@ const Problem: FC = () => {
               A great product is only half the equation. Without a predictable stream of sales calls, even the best ideas fail to gain traction.
             </p>
           </AnimatedWrapper>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {problems.map((problem, index) => {
                 const Icon = problem.icon;
@@ -451,7 +428,7 @@ const Problem: FC = () => {
       </section>
     );
 };
-  
+
 const Solution: FC = () => {
   const benefits = [
     {
@@ -485,15 +462,15 @@ const Solution: FC = () => {
                 <Zap className="w-4 h-4 mr-2" />
                 The Traction Labs System
                 </div>
-                
+
                 <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
                 We Build You A World-Class <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-teal-400">Outbound Sales Engine</span>
                 </h2>
-                
+
                 <p className="text-xl text-gray-400 mb-8 leading-relaxed">
                 We don't just send emails. We become an extension of your team, implementing a complete system for prospecting, writing, sending, and booking that drives sustainable growth.
                 </p>
-                
+
                 <div className="space-y-6">
                 {benefits.map((benefit, index) => {
                     const Icon = benefit.icon;
@@ -515,7 +492,7 @@ const Solution: FC = () => {
                 })}
                 </div>
             </AnimatedWrapper>
-          
+
             <AnimatedWrapper delay={200}>
                 <div className="relative">
                     <div className="bg-gray-800/50 backdrop-blur-xl border border-gray-700/80 rounded-3xl p-8 shadow-lg relative overflow-hidden">
@@ -551,7 +528,7 @@ const Solution: FC = () => {
     </section>
   );
 };
-  
+
 const Services: FC = () => {
   const services = [
     {
@@ -597,7 +574,7 @@ const Services: FC = () => {
            From strategy to execution, we provide everything you need to build a powerful outbound engine.
           </p>
         </AnimatedWrapper>
-        
+
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => {
             const Icon = service.icon;
@@ -658,7 +635,7 @@ const Process: FC = () => {
                         We've engineered a battle-tested process to build your sales engine from the ground up, transforming your sales from random to repeatable.
                     </p>
                 </AnimatedWrapper>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
                     {steps.map((step, index) => {
                         const Icon = step.icon;
@@ -703,88 +680,6 @@ const Process: FC = () => {
 };
 
 
-const ResourcesPage: FC = () => {
-    const resources = [
-        {
-            icon: FileText,
-            title: "Ultimate Cold Email Guide",
-            description: "A comprehensive guide to writing cold emails that actually get replies and book meetings.",
-            href: "#",
-        },
-        {
-            icon: Target,
-            title: "ICP & Prospecting Checklist",
-            description: "Define your Ideal Customer Profile and find high-quality leads with this step-by-step checklist.",
-            href: "#",
-        },
-        {
-            icon: Database,
-            title: "Lead Database Template",
-            description: "A free and simple template to organize your prospects and track your outreach efforts effectively.",
-            href: "#",
-        },
-         {
-            icon: Sparkles,
-            title: "Email Copywriting Formulas",
-            description: "Proven formulas to craft compelling email copy that converts readers into customers.",
-            href: "#",
-        },
-        {
-            icon: BarChart2,
-            title: "Sales Metrics Cheatsheet",
-            description: "Understand the key metrics to track for a successful outbound sales campaign.",
-            href: "#",
-        },
-        {
-            icon: Mail,
-            title: "Deliverability 101 Guide",
-            description: "Everything you need to know about email deliverability to avoid the spam folder.",
-            href: "#",
-        },
-    ];
-
-    return (
-        <section id="resources" className="py-24 pt-32 bg-[#111827]">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <AnimatedWrapper className="text-center mb-16">
-                    <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-                        Free Tools & Resources
-                    </h1>
-                    <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-                        Get a head start with these free resources, designed to help you improve your outbound sales process today.
-                    </p>
-                </AnimatedWrapper>
-
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {resources.map((resource, index) => {
-                        const Icon = resource.icon;
-                        return (
-                            <AnimatedWrapper key={index} delay={index * 100}>
-                                <div className="group bg-gray-800/50 backdrop-blur-xl p-8 rounded-2xl shadow-lg transition-all duration-300 border border-gray-700/80 hover:border-teal-500/50 transform hover:-translate-y-2 h-full flex flex-col">
-                                    <div className="bg-gradient-to-br from-indigo-500 to-teal-500 p-3 rounded-xl w-fit mb-6 shadow-lg shadow-indigo-500/20">
-                                        <Icon className="h-6 w-6 text-white" />
-                                    </div>
-                                    <h3 className="text-xl font-semibold text-white mb-3">
-                                        {resource.title}
-                                    </h3>
-                                    <p className="text-gray-400 leading-relaxed flex-grow mb-6">
-                                        {resource.description}
-                                    </p>
-                                    <a href={resource.href} className="flex items-center font-semibold text-teal-400 group-hover:text-teal-300 transition-colors">
-                                        Get the Resource
-                                        <Download className="ml-2 h-4 w-4" />
-                                    </a>
-                                </div>
-                            </AnimatedWrapper>
-                        );
-                    })}
-                </div>
-            </div>
-        </section>
-    );
-};
-
-
 const FoundationalPartners: FC = () => {
   return (
     <section className="py-20 bg-transparent">
@@ -824,7 +719,7 @@ const CTA: FC = () => {
                         <p className="text-lg text-indigo-100 max-w-2xl mx-auto mb-10">
                             Book a no-obligation strategy call. We'll analyze your business and provide an actionable roadmap to get your first qualified calls.
                         </p>
-                        
+
                         <a href={schedulingLink} target="_blank" rel="noopener noreferrer" className="inline-block">
                             <button className="group bg-white text-indigo-600 px-8 py-4 rounded-lg hover:bg-gray-200 transition-all transform hover:scale-105 flex items-center text-lg font-semibold shadow-lg mx-auto">
                                 I am convinced, let's work together
@@ -838,7 +733,7 @@ const CTA: FC = () => {
       </section>
     );
 };
-  
+
 const Footer: FC = () => {
   return (
     <footer className="bg-transparent border-t border-gray-700/50">
