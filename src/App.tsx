@@ -270,7 +270,7 @@ const Hero: FC = () => {
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">The Smart Way</span>
                       </h1>
                       <p className="text-xl md:text-2xl text-slate-600 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                        We help doctors, contractors, and service professionals get found online, build trust with customers, and grow their business without the tech headaches.
+                        We help Small Business Owners's get found online, build trust with customers, and grow their business without the tech headaches.
                       </p>
                       <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
                         <a href={schedulingLink} target="_blank" rel="noopener noreferrer" className="inline-block">
