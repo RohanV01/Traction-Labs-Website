@@ -57,8 +57,8 @@ const DarkModeStyles: FC = () => (
 
       /* Logo styling */
       .logo-image {
-        width: 28px;
-        height: 28px;
+        width: 32px;
+        height: 32px;
         object-fit: contain;
       }
     `}</style>
@@ -172,7 +172,7 @@ const Header: FC = () => {
         <div className="flex justify-between items-center h-20">
           <a href="#" onClick={(e) => handleNavClick(e, '#')} className="flex items-center space-x-3">
             <div className="icon-gradient p-3 rounded-xl shadow-lg shadow-[#4F46E5]/20">
-              <img src="/image.png" alt="Traction Labs Logo" className="logo-image" />
+              <img src="/traction_labs_logo.png" alt="Traction Labs Logo" className="logo-image" />
             </div>
             <span className="text-2xl font-bold text-white glow-text">
               Traction Labs
@@ -737,7 +737,7 @@ const Footer: FC = () => {
           <div className="md:col-span-2">
             <div className="flex items-center space-x-3 mb-6">
               <div className="icon-gradient p-3 rounded-xl shadow-lg shadow-[#4F46E5]/20">
-                <img src="/image.png" alt="Traction Labs Logo" className="logo-image" />
+                <img src="/traction_labs_logo.png" alt="Traction Labs Logo" className="logo-image" />
               </div>
               <span className="text-2xl font-bold glow-text">Traction Labs</span>
             </div>
