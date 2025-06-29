@@ -1,10 +1,17 @@
-<svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#4f46e5" />
-      <stop offset="100%" style="stop-color:#14b8a6" />
+    <linearGradient id="faviconGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B5CF6;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#A855F7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#C084FC;stop-opacity:1" />
     </linearGradient>
   </defs>
-  <rect width="24" height="24" rx="6" fill="url(#logoGradient)"/>
-  <path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="white"/>
+  
+  <rect x="4" y="20" width="4" height="8" rx="2" fill="url(#faviconGradient)" opacity="0.7"/>
+  <rect x="10" y="16" width="4" height="12" rx="2" fill="url(#faviconGradient)" opacity="0.8"/>
+  <rect x="16" y="12" width="4" height="16" rx="2" fill="url(#faviconGradient)" opacity="0.9"/>
+  <rect x="22" y="8" width="4" height="20" rx="2" fill="url(#faviconGradient)"/>
+  
+  <path d="M26 6 L30 2 L30 6 L26 6 Z" fill="url(#faviconGradient)" opacity="0.8"/>
+  <path d="M26 6 L30 2" stroke="url(#faviconGradient)" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
 </svg>
