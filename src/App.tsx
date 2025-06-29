@@ -171,7 +171,7 @@ const Header: FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <a href="#" onClick={(e) => handleNavClick(e, '#')} className="flex items-center space-x-3">
-            <img src="/traction_labs_logo.png" alt="Traction Labs Logo" className="logo-image" />
+            <img src="/traction_labs_logo.png" alt="Traction Labs - Digital Marketing for Doctors and Real Estate Companies in India" className="logo-image" />
             <span className="text-2xl font-bold text-white glow-text">
               Traction Labs
             </span>
@@ -226,10 +226,10 @@ const BusinessSuccessChart: FC = () => {
     const [activeStage, setActiveStage] = useState<string | null>(null);
 
     const stages = [
-        { name: 'Get Found Online', icon: Eye, color: 'bg-[#4F46E5]', description: 'Customers discover your business' },
+        { name: 'Get Found Online', icon: Eye, color: 'bg-[#4F46E5]', description: 'Patients & clients discover your practice' },
         { name: 'Build Trust', icon: Shield, color: 'bg-[#059669]', description: 'Professional presence builds credibility' },
-        { name: 'Generate Leads', icon: Phone, color: 'bg-[#DC2626]', description: 'More calls and inquiries' },
-        { name: 'Grow Revenue', icon: DollarSign, color: 'bg-[#7C3AED]', description: 'Increased sales and profits' },
+        { name: 'Generate Leads', icon: Phone, color: 'bg-[#DC2626]', description: 'More appointments and inquiries' },
+        { name: 'Grow Revenue', icon: DollarSign, color: 'bg-[#7C3AED]', description: 'Increased patients and sales' },
     ];
 
     return (
@@ -283,11 +283,12 @@ const Hero: FC = () => {
                 <div className="text-center lg:text-left z-10 relative">
                     <AnimatedWrapper>
                       <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-                        Grow Your Business<br/> 
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4F46E5] to-[#7C3AED] glow-text">The Smart Way</span>
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4F46E5] to-[#7C3AED] glow-text">Traction Labs:</span><br/>
+                        Digital Marketing for<br/>
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4F46E5] to-[#7C3AED] glow-text">Doctors & Real Estate</span>
                       </h1>
                       <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-                        We help Small Business Owners's get found online, build trust with customers, and grow their business without the tech headaches.
+                        We help doctors, clinics, and real estate companies across India get found online, build trust with patients and clients, and grow their business without the tech headaches.
                       </p>
                       <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
                         <a href={schedulingLink} target="_blank" rel="noopener noreferrer" className="inline-block">
@@ -302,7 +303,7 @@ const Hero: FC = () => {
                             <div className="w-8 h-8 bg-[#059669] rounded-full border-2 border-[#1F2937]"></div>
                             <div className="w-8 h-8 bg-[#DC2626] rounded-full border-2 border-[#1F2937]"></div>
                           </div>
-                          <span className="text-sm font-medium">Join 500+ happy business owners</span>
+                          <span className="text-sm font-medium">Join 500+ happy healthcare & real estate professionals</span>
                         </div>
                       </div>
                       <div className="grid grid-cols-3 gap-4 text-center lg:text-left">
@@ -315,8 +316,8 @@ const Hero: FC = () => {
                           <div className="text-gray-400 text-sm">Money-Back Guarantee</div>
                         </div>
                         <div>
-                          <div className="text-2xl font-bold text-white">Local</div>
-                          <div className="text-gray-400 text-sm">Business Experts</div>
+                          <div className="text-2xl font-bold text-white">India-Wide</div>
+                          <div className="text-gray-400 text-sm">Service Coverage</div>
                         </div>
                       </div>
                     </AnimatedWrapper>
@@ -336,23 +337,23 @@ const Problem: FC = () => {
     const problems = [
       { 
         icon: Eye, 
-        title: "Invisible to Customers",
-        description: "Your competitors show up first when customers search online, while your business stays hidden."
+        title: "Invisible to Patients & Clients",
+        description: "Your competitors show up first when people search for doctors or real estate services online, while your practice stays hidden."
       },
       { 
         icon: Clock, 
         title: "Outdated Online Presence",
-        description: "Your website looks unprofessional or doesn't exist, making customers question your credibility."
+        description: "Your website looks unprofessional or doesn't exist, making patients and clients question your credibility and expertise."
       },
       { 
         icon: TrendingDown, 
         title: "Losing to Competition",
-        description: "Competitors with better online presence are stealing your customers and charging higher prices."
+        description: "Competitors with better online presence are stealing your patients and clients while charging higher fees."
       },
       { 
         icon: Phone, 
         title: "Not Enough Quality Leads",
-        description: "You're not getting enough phone calls from customers who are ready to buy your services."
+        description: "You're not getting enough appointments or inquiries from patients and clients who are ready to choose your services."
       },
     ];
 
@@ -361,11 +362,11 @@ const Problem: FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <AnimatedWrapper className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Are You Losing Customers Every Day?
+              Are You Losing Patients & Clients Every Day?
             </h2>
             <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-              If customers can't find you online or don't trust what they see, they're choosing your competitors instead. 
-              Here's what's costing you business right now:
+              If patients and clients can't find you online or don't trust what they see, they're choosing your competitors instead. 
+              Here's what's costing your practice business right now:
             </p>
           </AnimatedWrapper>
 
@@ -398,11 +399,11 @@ const Problem: FC = () => {
             <div className="mt-16 text-center">
               <div className="bg-red-500/10 border-2 border-red-500/30 rounded-2xl p-8 max-w-4xl mx-auto">
                 <h3 className="text-2xl font-bold text-red-400 mb-4">
-                  Every Day You Wait, You Lose More Customers
+                  Every Day You Wait, You Lose More Patients & Clients
                 </h3>
                 <p className="text-lg text-red-300 leading-relaxed">
-                  While you're thinking about it, your competitors are already online capturing the customers that should be yours. 
-                  The longer you wait, the further behind you fall.
+                  While you're thinking about it, your competitors are already online capturing the patients and clients that should be yours. 
+                  The longer you wait, the further behind you fall in the digital healthcare and real estate market.
                 </p>
               </div>
             </div>
@@ -417,22 +418,22 @@ const Solution: FC = () => {
     {
       icon: Search,
       title: "Get Found First",
-      description: "Show up at the top when customers search for your services in your area."
+      description: "Show up at the top when patients search for doctors or clients search for real estate services in your area."
     },
     {
       icon: Globe,
       title: "Professional Website",
-      description: "A modern, trustworthy website that converts visitors into paying customers."
+      description: "A modern, trustworthy website that converts visitors into patients and clients."
     },
     {
       icon: Star,
       title: "5-Star Reputation",
-      description: "Build and manage your online reputation with authentic customer reviews."
+      description: "Build and manage your online reputation with authentic patient and client reviews."
     },
     {
       icon: Phone,
       title: "More Quality Leads",
-      description: "Get more phone calls from customers who are ready to hire you."
+      description: "Get more appointments and inquiries from patients and clients who are ready to choose you."
     }
   ];
 
@@ -447,11 +448,11 @@ const Solution: FC = () => {
                 </div>
 
                 <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                We Make Your Business <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4F46E5] to-[#7C3AED] glow-text">The Obvious Choice</span>
+                We Make Your Practice <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4F46E5] to-[#7C3AED] glow-text">The Obvious Choice</span>
                 </h2>
 
                 <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-                We don't just build websites. We create a complete digital presence that makes customers choose you over your competitors. From search results to social media, we make sure you look like the professional, trustworthy business you are.
+                We don't just build websites. We create a complete digital presence that makes patients and clients choose you over your competitors. From search results to social media, we make sure you look like the professional, trustworthy practice you are.
                 </p>
 
                 <div className="space-y-6">
@@ -487,19 +488,19 @@ const Solution: FC = () => {
                         <div className="space-y-4 text-gray-300">
                         <div className="flex items-start space-x-3">
                             <ArrowRight className="h-5 w-5 text-[#4F46E5] flex-shrink-0 mt-1" />
-                            <span className="text-lg">Your phone rings with qualified customers ready to buy</span>
+                            <span className="text-lg">Your phone rings with qualified patients and clients ready to book</span>
                         </div>
                         <div className="flex items-start space-x-3">
                             <ArrowRight className="h-5 w-5 text-[#4F46E5] flex-shrink-0 mt-1" />
-                            <span className="text-lg">You can charge premium prices because customers trust you</span>
+                            <span className="text-lg">You can charge premium fees because patients and clients trust you</span>
                         </div>
                         <div className="flex items-start space-x-3">
                             <ArrowRight className="h-5 w-5 text-[#4F46E5] flex-shrink-0 mt-1" />
-                            <span className="text-lg">You spend less time chasing customers and more time serving them</span>
+                            <span className="text-lg">You spend less time marketing and more time serving patients and clients</span>
                         </div>
                          <div className="flex items-start space-x-3">
                             <ArrowRight className="h-5 w-5 text-[#4F46E5] flex-shrink-0 mt-1" />
-                            <span className="text-lg">Your business grows consistently, month after month</span>
+                            <span className="text-lg">Your practice grows consistently, month after month</span>
                         </div>
                         </div>
                     </div>
@@ -517,37 +518,37 @@ const Services: FC = () => {
     {
       icon: Globe,
       title: "Professional Website Design",
-      description: "Modern, mobile-friendly websites that build trust and convert visitors into customers.",
-      features: ["Mobile-responsive design", "Fast loading speeds", "Easy contact forms", "Professional photography"]
+      description: "Modern, mobile-friendly websites that build trust and convert visitors into patients and clients.",
+      features: ["Mobile-responsive design", "Fast loading speeds", "Easy appointment booking", "Professional photography"]
     },
     {
       icon: Search,
-      title: "Local Search Optimization",
-      description: "Get found first when customers search for your services in your area.",
-      features: ["Google My Business optimization", "Local keyword rankings", "Online directory listings", "Map pack visibility"]
+      title: "Local SEO Optimization",
+      description: "Get found first when patients search for doctors or clients search for real estate services in your area.",
+      features: ["Google My Business optimization", "Local keyword rankings", "Medical/Real estate directories", "Map pack visibility"]
     },
     {
         icon: Star,
         title: "Reputation Management",
-        description: "Build and protect your online reputation with authentic customer reviews.",
+        description: "Build and protect your online reputation with authentic patient and client reviews.",
         features: ["Review generation campaigns", "Review response management", "Reputation monitoring", "Crisis management"]
     },
     {
       icon: Smartphone,
       title: "Social Media Presence",
-      description: "Professional social media that showcases your work and builds community trust.",
+      description: "Professional social media that showcases your expertise and builds community trust.",
       features: ["Content creation", "Regular posting", "Community engagement", "Local networking"]
     },
     {
       icon: Target,
       title: "Digital Advertising",
-      description: "Targeted ads that bring qualified customers directly to your business.",
+      description: "Targeted ads that bring qualified patients and clients directly to your practice.",
       features: ["Google Ads management", "Facebook advertising", "Local targeting", "ROI tracking"]
     },
     {
       icon: BarChart2,
       title: "Performance Tracking",
-      description: "Clear reports showing exactly how your investment is growing your business.",
+      description: "Clear reports showing exactly how your investment is growing your practice.",
       features: ["Monthly performance reports", "Lead tracking", "ROI analysis", "Growth recommendations"]
     }
   ];
@@ -557,10 +558,10 @@ const Services: FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <AnimatedWrapper className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Everything You Need to Dominate Your Market
+            Everything You Need to Dominate Your Local Market
           </h2>
           <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-           We handle all the technical stuff so you can focus on what you do best - running your business.
+           We handle all the technical stuff so you can focus on what you do best - treating patients and serving clients.
           </p>
         </AnimatedWrapper>
 
@@ -601,25 +602,25 @@ const Process: FC = () => {
     const steps = [
         {
             name: 'Strategy Call',
-            description: "We analyze your current online presence and identify exactly what's holding your business back.",
+            description: "We analyze your current online presence and identify exactly what's holding your practice back from attracting more patients and clients.",
             icon: Search,
             duration: "30 Minutes"
         },
         {
             name: 'Custom Growth Plan',
-            description: "We create a personalized strategy to help your business get found, build trust, and attract more customers.",
+            description: "We create a personalized digital marketing strategy to help your practice get found, build trust, and attract more patients and clients.",
             icon: Target,
             duration: "Week 1"
         },
         {
             name: 'Professional Implementation',
-            description: "Our team builds your new website, optimizes your online presence, and launches your digital marketing.",
+            description: "Our team builds your new website, optimizes your online presence, and launches your digital marketing campaigns.",
             icon: Rocket,
             duration: "Week 2-4"
         },
         {
             name: 'Results & Growth',
-            description: "You start getting more calls, more customers, and more revenue while we continue optimizing your results.",
+            description: "You start getting more appointments, more patients and clients, and more revenue while we continue optimizing your results.",
             icon: TrendingUp,
             duration: "Month 1+"
         },
@@ -630,10 +631,10 @@ const Process: FC = () => {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <AnimatedWrapper className="text-center mb-16">
                     <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                        How We Grow Your Business
+                        How We Grow Your Practice
                     </h2>
                     <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
-                        Our proven process has helped hundreds of small businesses attract more customers and increase their revenue.
+                        Our proven process has helped hundreds of doctors, clinics, and real estate professionals across India attract more patients and clients while increasing their revenue.
                     </p>
                 </AnimatedWrapper>
 
@@ -661,10 +662,10 @@ const Process: FC = () => {
                      <div className="text-center">
                          <div className="bg-[#4F46E5]/10 border-2 border-[#4F46E5]/30 rounded-2xl p-8 max-w-3xl mx-auto">
                              <h3 className="text-2xl font-bold text-[#4F46E5] mb-4">
-                                 Ready to Start Growing?
+                                 Ready to Start Growing Your Practice?
                              </h3>
                              <p className="text-lg text-gray-300 mb-6 leading-relaxed">
-                                 Book your strategy call today and discover exactly how we can help your business attract more customers.
+                                 Book your strategy call today and discover exactly how we can help your practice attract more patients and clients.
                              </p>
                              <a href={schedulingLink} target="_blank" rel="noopener noreferrer">
                                  <button className="bg-[#4F46E5] text-white px-8 py-4 rounded-xl hover:bg-[#3730A3] transition-all shadow-lg shadow-[#4F46E5]/30 font-bold text-lg transform hover:scale-105">
@@ -686,11 +687,11 @@ const CTA: FC = () => {
             <AnimatedWrapper>
                 <div className="text-white">
                     <h2 className="text-4xl md:text-5xl font-bold mb-6 glow-text">
-                        Stop Losing Customers to Your Competition
+                        Stop Losing Patients & Clients to Your Competition
                     </h2>
                     <p className="text-xl mb-8 leading-relaxed opacity-90">
-                        Every day you wait is another day your competitors are capturing the customers that should be yours. 
-                        Book your strategy call and discover exactly how to dominate your local market.
+                        Every day you wait is another day your competitors are capturing the patients and clients that should be yours. 
+                        Book your strategy call and discover exactly how to dominate your local healthcare and real estate market.
                     </p>
 
                     <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
@@ -734,11 +735,11 @@ const Footer: FC = () => {
         <div className="grid md:grid-cols-4 gap-8 mb-12">
           <div className="md:col-span-2">
             <div className="flex items-center space-x-3 mb-6">
-              <img src="/traction_labs_logo.png" alt="Traction Labs Logo" className="logo-image" />
+              <img src="/traction_labs_logo.png" alt="Traction Labs - Digital Marketing for Doctors and Real Estate Companies in India" className="logo-image" />
               <span className="text-2xl font-bold glow-text">Traction Labs</span>
             </div>
             <p className="text-gray-400 mb-6 max-w-md leading-relaxed text-lg">
-              We help small business owners build a powerful digital presence that attracts customers, builds trust, and drives growth.
+              We help doctors, clinics, and real estate professionals across India build a powerful digital presence that attracts patients and clients, builds trust, and drives growth.
             </p>
             <div className="flex space-x-4">
               <a href="#" className="bg-[#1F2937] p-3 rounded-xl hover:bg-[#4F46E5] transition-all border border-gray-700 hover:border-[#4F46E5]">
@@ -774,7 +775,7 @@ const Footer: FC = () => {
               </li>
               <li className="flex items-start space-x-2">
                 <MapPin className="h-5 w-5 mt-1 flex-shrink-0" />
-                <span>Helping Small Businesses Nationwide</span>
+                <span>Serving Doctors & Real Estate Professionals Across India</span>
               </li>
             </ul>
           </div>
@@ -783,7 +784,7 @@ const Footer: FC = () => {
         <div className="border-t border-gray-800 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm mb-4 md:mb-0">
-              © 2024 Traction Labs. All rights reserved.
+              © 2024 Traction Labs. All rights reserved. Digital Marketing for Healthcare & Real Estate Professionals in India.
             </p>
             <div className="flex space-x-6 text-sm text-gray-400">
               <a href="#" className="hover:text-[#4F46E5] transition-colors">Privacy Policy</a>
