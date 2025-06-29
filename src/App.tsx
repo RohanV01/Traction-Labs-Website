@@ -107,7 +107,6 @@ const App: FC = () => {
               <Solution />
               <Services />
               <Process />
-              <Results />
               <CTA />
             </>
         </main>
@@ -661,131 +660,6 @@ const Process: FC = () => {
             </div>
         </section>
     )
-};
-
-const Results: FC = () => {
-  const businessTypes = [
-    {
-      icon: Stethoscope,
-      type: "Family Practice",
-      name: "Dr. Michael Chen",
-      location: "Austin, TX",
-      challenge: "New patients couldn't find the practice online, relying only on referrals",
-      results: [
-        "400% increase in new patient appointments",
-        "First page rankings for 'family doctor Austin'",
-        "60+ five-star Google reviews in 4 months"
-      ],
-      quote: "Traction Labs completely transformed our practice. We went from struggling to find new patients to having a 2-week waiting list. Our online presence now matches the quality of care we provide."
-    },
-    {
-      icon: Wrench,
-      type: "HVAC Contractor",
-      name: "Johnson Heating & Air",
-      location: "Phoenix, AZ",
-      challenge: "Losing emergency calls to competitors with better online visibility",
-      results: [
-        "350% increase in emergency service calls",
-        "Average job value increased by 45%",
-        "Fully booked through entire summer season"
-      ],
-      quote: "Our phone started ringing non-stop after working with Traction Labs. Customers now see us as the premium HVAC company in Phoenix, and we can charge accordingly."
-    },
-    {
-      icon: Home,
-      type: "Roofing Company",
-      name: "Elite Roofing Solutions",
-      location: "Denver, CO",
-      challenge: "Homeowners couldn't find them during storm season when they needed work most",
-      results: [
-        "500% increase in storm damage leads",
-        "Top 3 rankings for 'roof repair Denver'",
-        "$200K additional revenue in first 6 months"
-      ],
-      quote: "Storm season used to be hit or miss for us. Now when storms hit, our phone rings first. Traction Labs made us the go-to roofing company in Denver."
-    }
-  ];
-
-  return (
-    <section id="results" className="py-20 gradient-bg">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <AnimatedWrapper className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
-            Real Results from Real Business Owners
-          </h2>
-          <p className="text-xl text-slate-600 max-w-4xl mx-auto leading-relaxed">
-            See how we've helped business owners just like you attract more customers and grow their revenue.
-          </p>
-        </AnimatedWrapper>
-        
-        {/* Case Studies */}
-        <div className="space-y-12">
-          <h3 className="text-3xl font-bold text-slate-900 text-center mb-12">
-            Success Stories from Business Owners Like You
-          </h3>
-          
-          {businessTypes.map((business, index) => {
-            const Icon = business.icon;
-            return (
-              <AnimatedWrapper key={index} delay={index * 200}>
-                <div className="bg-white p-8 lg:p-12 rounded-2xl shadow-xl border-2 border-slate-100">
-                  <div className="grid lg:grid-cols-2 gap-8">
-                    <div>
-                      <div className="flex items-center mb-6">
-                        <div className="bg-gradient-to-br from-blue-500 to-indigo-600 p-3 rounded-xl mr-4 shadow-lg">
-                          <Icon className="h-8 w-8 text-white" />
-                        </div>
-                        <div>
-                          <div className="text-sm font-semibold text-blue-600 bg-blue-100 px-3 py-1 rounded-full mb-2 w-fit">
-                            {business.type}
-                          </div>
-                          <h4 className="text-2xl font-bold text-slate-900">{business.name}</h4>
-                          <p className="text-slate-600">{business.location}</p>
-                        </div>
-                      </div>
-                      
-                      <div className="mb-6">
-                        <h5 className="font-bold text-slate-900 mb-3 text-lg">The Challenge:</h5>
-                        <p className="text-slate-600 text-lg leading-relaxed">{business.challenge}</p>
-                      </div>
-                      
-                      <div className="bg-blue-50 border-2 border-blue-200 rounded-xl p-6">
-                        <blockquote className="text-slate-800 italic text-lg leading-relaxed">
-                          "{business.quote}"
-                        </blockquote>
-                        <cite className="text-blue-700 text-sm mt-3 block font-semibold">- {business.name}</cite>
-                      </div>
-                    </div>
-                    
-                    <div>
-                      <h5 className="font-bold text-slate-900 mb-6 text-lg">Results Achieved:</h5>
-                      <div className="space-y-4">
-                        {business.results.map((result, idx) => (
-                          <div key={idx} className="flex items-start space-x-3">
-                            <div className="bg-green-100 p-1 rounded-full flex-shrink-0 mt-1">
-                              <CheckCircle className="h-5 w-5 text-green-600" />
-                            </div>
-                            <span className="text-slate-800 font-semibold text-lg">{result}</span>
-                          </div>
-                        ))}
-                      </div>
-                      
-                      <div className="mt-8 p-6 bg-gradient-to-r from-green-50 to-blue-50 rounded-xl border-2 border-green-100">
-                        <div className="text-center">
-                          <div className="text-3xl font-bold text-green-600 mb-2">30 Days</div>
-                          <div className="text-green-800 font-semibold">Time to First Results</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </AnimatedWrapper>
-            )
-          })}
-        </div>
-      </div>
-    </section>
-  );
 };
 
 const CTA: FC = () => {
