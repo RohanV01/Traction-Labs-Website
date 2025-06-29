@@ -4,43 +4,55 @@ import { Zap, Menu, X, ArrowRight, CheckCircle, Target, Users, GraduationCap, Se
 // === CONFIGURATION: Add your scheduling link here ===
 const schedulingLink = "https://calendar.app.google/juqLpxppzGjEkJic8";
 
-// Custom CSS for trustworthy effects
-const TrustworthyStyles: FC = () => (
+// Custom CSS for dark mode professional effects
+const DarkModeStyles: FC = () => (
     <style>{`
-      /* Trustworthy Growth Animation */
-      @keyframes trustPulse {
+      /* Professional Dark Mode Animations */
+      @keyframes professionalPulse {
         0% {
           transform: scale(1);
-          box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.3);
+          box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.4);
         }
         70% {
-          transform: scale(1.03);
-          box-shadow: 0 0 15px 20px rgba(59, 130, 246, 0);
+          transform: scale(1.02);
+          box-shadow: 0 0 20px 25px rgba(79, 70, 229, 0);
         }
         100% {
           transform: scale(1);
-          box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+          box-shadow: 0 0 0 0 rgba(79, 70, 229, 0);
         }
       }
-      .trust-pulse {
-        animation: trustPulse 4s ease-in-out infinite;
+      .professional-pulse {
+        animation: professionalPulse 4s ease-in-out infinite;
       }
       
-      /* Subtle gradient background */
-      .gradient-bg {
-        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+      /* Dark gradient backgrounds */
+      .dark-gradient-bg {
+        background: linear-gradient(135deg, #0A0F1E 0%, #1F2937 100%);
       }
       
-      /* Professional card hover */
-      .professional-card {
+      /* Professional card hover effects */
+      .dark-professional-card {
         transition: all 0.3s ease;
-        border: 2px solid transparent;
+        border: 1px solid rgba(79, 70, 229, 0.2);
+        background: #1F2937;
       }
       
-      .professional-card:hover {
+      .dark-professional-card:hover {
         transform: translateY(-8px);
-        border-color: #3b82f6;
-        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        border-color: #4F46E5;
+        box-shadow: 0 25px 50px rgba(79, 70, 229, 0.15);
+        background: #374151;
+      }
+
+      /* Glowing text effect */
+      .glow-text {
+        text-shadow: 0 0 20px rgba(79, 70, 229, 0.5);
+      }
+
+      /* Icon gradient backgrounds */
+      .icon-gradient {
+        background: linear-gradient(135deg, #4F46E5 0%, #3730A3 100%);
       }
     `}</style>
   );
@@ -97,8 +109,8 @@ const AnimatedWrapper: FC<AnimatedWrapperProps> = ({ children, className = '', d
 const App: FC = () => {
   return (
     <>
-      <TrustworthyStyles />
-      <div className="min-h-screen bg-slate-50 text-slate-800 font-sans leading-relaxed relative overflow-x-hidden">
+      <DarkModeStyles />
+      <div className="min-h-screen bg-[#0A0F1E] text-white font-sans leading-relaxed relative overflow-x-hidden">
         <Header />
         <main className="relative z-10">
             <>
@@ -146,16 +158,16 @@ const Header: FC = () => {
   return (
     <header className={`fixed w-full z-50 transition-all duration-300 ${
       isScrolled
-        ? 'bg-white/95 backdrop-blur-lg border-b border-slate-200 shadow-lg'
-        : 'bg-white border-b border-slate-100'
+        ? 'bg-[#0A0F1E]/95 backdrop-blur-lg border-b border-[#4F46E5]/20 shadow-lg shadow-[#4F46E5]/10'
+        : 'bg-[#0A0F1E]/80 border-b border-gray-800/50'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <a href="#" onClick={(e) => handleNavClick(e, '#')} className="flex items-center space-x-3">
-            <div className="bg-gradient-to-br from-blue-600 to-indigo-700 p-3 rounded-xl shadow-lg">
+            <div className="icon-gradient p-3 rounded-xl shadow-lg shadow-[#4F46E5]/20">
               <Zap className="h-7 w-7 text-white" />
             </div>
-            <span className="text-2xl font-bold text-slate-800">
+            <span className="text-2xl font-bold text-white glow-text">
               Traction Labs
             </span>
           </a>
@@ -163,20 +175,20 @@ const Header: FC = () => {
           <div className="hidden md:flex items-center space-x-8">
             <nav className="flex space-x-8">
               {navLinks.map(link => (
-                <a key={link.href} href={link.href} onClick={(e) => handleNavClick(e, link.href)} className="text-slate-700 hover:text-blue-600 transition-colors font-semibold text-lg">
+                <a key={link.href} href={link.href} onClick={(e) => handleNavClick(e, link.href)} className="text-gray-300 hover:text-[#4F46E5] transition-colors font-semibold text-lg">
                   {link.label}
                 </a>
               ))}
             </nav>
             <a href={schedulingLink} target="_blank" rel="noopener noreferrer">
-                <button className="bg-blue-600 text-white px-6 py-3 rounded-xl hover:bg-blue-700 transition-all shadow-lg font-semibold text-lg transform hover:scale-105">
+                <button className="bg-[#4F46E5] text-white px-6 py-3 rounded-xl hover:bg-[#3730A3] transition-all shadow-lg shadow-[#4F46E5]/30 font-semibold text-lg transform hover:scale-105">
                     Book a Strategy Call
                 </button>
             </a>
           </div>
 
           <button
-            className="md:hidden p-2 rounded-lg text-slate-700 hover:bg-slate-100 transition-colors"
+            className="md:hidden p-2 rounded-lg text-gray-300 hover:bg-[#1F2937] transition-colors"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -184,14 +196,14 @@ const Header: FC = () => {
         </div>
 
         {isMenuOpen && (
-          <div className="md:hidden bg-white border-t border-slate-200 shadow-lg">
+          <div className="md:hidden bg-[#1F2937] border-t border-gray-700 shadow-lg rounded-b-xl">
             <div className="px-4 pt-2 pb-4 space-y-1">
               {navLinks.map(link => (
-                   <a key={link.href} href={link.href} onClick={(e) => handleNavClick(e, link.href)} className="block px-3 py-3 text-slate-700 hover:text-blue-600 hover:bg-slate-50 rounded-lg transition-colors text-lg font-semibold">{link.label}</a>
+                   <a key={link.href} href={link.href} onClick={(e) => handleNavClick(e, link.href)} className="block px-3 py-3 text-gray-300 hover:text-[#4F46E5] hover:bg-[#374151] rounded-lg transition-colors text-lg font-semibold">{link.label}</a>
               ))}
-               <div className="border-t border-slate-200 pt-4 mt-2">
+               <div className="border-t border-gray-700 pt-4 mt-2">
                  <a href={schedulingLink} target="_blank" rel="noopener noreferrer" className="w-full">
-                     <button className="w-full bg-blue-600 text-white px-6 py-3 rounded-xl hover:bg-blue-700 transition-all shadow-lg font-semibold text-lg">
+                     <button className="w-full bg-[#4F46E5] text-white px-6 py-3 rounded-xl hover:bg-[#3730A3] transition-all shadow-lg shadow-[#4F46E5]/30 font-semibold text-lg">
                          Book a Strategy Call
                      </button>
                  </a>
@@ -209,16 +221,16 @@ const BusinessSuccessChart: FC = () => {
     const [activeStage, setActiveStage] = useState<string | null>(null);
 
     const stages = [
-        { name: 'Get Found Online', icon: Eye, color: 'bg-blue-500', description: 'Customers discover your business' },
-        { name: 'Build Trust', icon: Shield, color: 'bg-green-500', description: 'Professional presence builds credibility' },
-        { name: 'Generate Leads', icon: Phone, color: 'bg-orange-500', description: 'More calls and inquiries' },
-        { name: 'Grow Revenue', icon: DollarSign, color: 'bg-purple-500', description: 'Increased sales and profits' },
+        { name: 'Get Found Online', icon: Eye, color: 'bg-[#4F46E5]', description: 'Customers discover your business' },
+        { name: 'Build Trust', icon: Shield, color: 'bg-[#059669]', description: 'Professional presence builds credibility' },
+        { name: 'Generate Leads', icon: Phone, color: 'bg-[#DC2626]', description: 'More calls and inquiries' },
+        { name: 'Grow Revenue', icon: DollarSign, color: 'bg-[#7C3AED]', description: 'Increased sales and profits' },
     ];
 
     return (
         <div className="w-full max-w-lg mx-auto">
-            <div className="bg-white rounded-2xl shadow-xl border border-slate-200 p-8">
-                <h3 className="text-2xl font-bold text-slate-800 text-center mb-8">Your Path to Growth</h3>
+            <div className="bg-[#1F2937] rounded-2xl shadow-xl border border-[#4F46E5]/20 p-8">
+                <h3 className="text-2xl font-bold text-white text-center mb-8">Your Path to Growth</h3>
                 <div className="space-y-6">
                     {stages.map((stage, index) => {
                         const isPulsing = stage.name === 'Grow Revenue';
@@ -231,22 +243,22 @@ const BusinessSuccessChart: FC = () => {
                                 onMouseEnter={() => setActiveStage(stage.name)}
                                 onMouseLeave={() => setActiveStage(null)}
                                 className={`flex items-center p-4 rounded-xl transition-all duration-300 cursor-pointer
-                                    ${isActive ? 'bg-slate-50 shadow-md border-2 border-blue-200' : 'bg-white border border-slate-100'}`}
+                                    ${isActive ? 'bg-[#374151] shadow-md border-2 border-[#4F46E5]/30' : 'bg-[#1F2937] border border-gray-700'}`}
                             >
                                 <div className={`
                                     p-3 rounded-full mr-4 transition-all duration-300 ${stage.color}
-                                    ${isPulsing ? 'trust-pulse' : ''}
+                                    ${isPulsing ? 'professional-pulse' : ''}
                                     ${isActive ? 'shadow-lg scale-110' : 'shadow-md'}`
                                 }>
                                     <Icon className="h-6 w-6 text-white" />
                                 </div>
                                 <div className="flex-1">
-                                    <h4 className={`font-bold text-lg ${isActive ? 'text-slate-800' : 'text-slate-700'}`}>
+                                    <h4 className={`font-bold text-lg ${isActive ? 'text-white' : 'text-gray-300'}`}>
                                         {stage.name}
                                     </h4>
-                                    <p className="text-slate-600 text-sm">{stage.description}</p>
+                                    <p className="text-gray-400 text-sm">{stage.description}</p>
                                 </div>
-                                <div className="text-2xl font-bold text-slate-400">
+                                <div className="text-2xl font-bold text-gray-600">
                                     {index + 1}
                                 </div>
                             </div>
@@ -260,46 +272,46 @@ const BusinessSuccessChart: FC = () => {
 
 const Hero: FC = () => {
     return (
-      <section className="min-h-screen flex items-center justify-center pt-20 lg:pt-0 gradient-bg">
+      <section className="min-h-screen flex items-center justify-center pt-20 lg:pt-0 dark-gradient-bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
             <div className="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
                 <div className="text-center lg:text-left z-10 relative">
                     <AnimatedWrapper>
-                      <h1 className="text-5xl md:text-7xl font-bold text-slate-900 mb-6 leading-tight">
+                      <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
                         Grow Your Business<br/> 
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">The Smart Way</span>
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4F46E5] to-[#7C3AED] glow-text">The Smart Way</span>
                       </h1>
-                      <p className="text-xl md:text-2xl text-slate-600 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                      <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
                         We help Small Business Owners's get found online, build trust with customers, and grow their business without the tech headaches.
                       </p>
                       <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
                         <a href={schedulingLink} target="_blank" rel="noopener noreferrer" className="inline-block">
-                          <button className="group bg-blue-600 text-white px-8 py-4 rounded-xl hover:bg-blue-700 transition-all transform hover:scale-105 inline-flex items-center justify-center text-xl font-bold shadow-xl">
+                          <button className="group bg-[#4F46E5] text-white px-8 py-4 rounded-xl hover:bg-[#3730A3] transition-all transform hover:scale-105 inline-flex items-center justify-center text-xl font-bold shadow-xl shadow-[#4F46E5]/30">
                               Book a Strategy Call
                               <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-1 transition-transform" />
                           </button>
                         </a>
-                        <div className="flex items-center justify-center lg:justify-start text-slate-600">
+                        <div className="flex items-center justify-center lg:justify-start text-gray-400">
                           <div className="flex -space-x-2 mr-3">
-                            <div className="w-8 h-8 bg-blue-500 rounded-full border-2 border-white"></div>
-                            <div className="w-8 h-8 bg-green-500 rounded-full border-2 border-white"></div>
-                            <div className="w-8 h-8 bg-orange-500 rounded-full border-2 border-white"></div>
+                            <div className="w-8 h-8 bg-[#4F46E5] rounded-full border-2 border-[#1F2937]"></div>
+                            <div className="w-8 h-8 bg-[#059669] rounded-full border-2 border-[#1F2937]"></div>
+                            <div className="w-8 h-8 bg-[#DC2626] rounded-full border-2 border-[#1F2937]"></div>
                           </div>
                           <span className="text-sm font-medium">Join 500+ happy business owners</span>
                         </div>
                       </div>
                       <div className="grid grid-cols-3 gap-4 text-center lg:text-left">
                         <div>
-                          <div className="text-2xl font-bold text-slate-800">30 Days</div>
-                          <div className="text-slate-600 text-sm">To See Results</div>
+                          <div className="text-2xl font-bold text-white">30 Days</div>
+                          <div className="text-gray-400 text-sm">To See Results</div>
                         </div>
                         <div>
-                          <div className="text-2xl font-bold text-slate-800">No Risk</div>
-                          <div className="text-slate-600 text-sm">Money-Back Guarantee</div>
+                          <div className="text-2xl font-bold text-white">No Risk</div>
+                          <div className="text-gray-400 text-sm">Money-Back Guarantee</div>
                         </div>
                         <div>
-                          <div className="text-2xl font-bold text-slate-800">Local</div>
-                          <div className="text-slate-600 text-sm">Business Experts</div>
+                          <div className="text-2xl font-bold text-white">Local</div>
+                          <div className="text-gray-400 text-sm">Business Experts</div>
                         </div>
                       </div>
                     </AnimatedWrapper>
@@ -340,13 +352,13 @@ const Problem: FC = () => {
     ];
 
     return (
-      <section className="py-20 bg-slate-100">
+      <section className="py-20 bg-[#1F2937]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <AnimatedWrapper className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
               Are You Losing Customers Every Day?
             </h2>
-            <p className="text-xl text-slate-600 max-w-4xl mx-auto leading-relaxed">
+            <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
               If customers can't find you online or don't trust what they see, they're choosing your competitors instead. 
               Here's what's costing you business right now:
             </p>
@@ -357,16 +369,16 @@ const Problem: FC = () => {
                 const Icon = problem.icon;
                 return (
                   <AnimatedWrapper key={index} delay={index * 150}>
-                    <div className="professional-card bg-white p-8 rounded-2xl shadow-lg h-full">
+                    <div className="dark-professional-card p-8 rounded-2xl shadow-lg h-full">
                       <div className="flex items-start space-x-4">
-                        <div className="bg-red-100 p-4 rounded-xl flex-shrink-0">
-                          <Icon className="h-8 w-8 text-red-600" />
+                        <div className="bg-red-500/20 p-4 rounded-xl flex-shrink-0 border border-red-500/30">
+                          <Icon className="h-8 w-8 text-red-400" />
                         </div>
                         <div>
-                          <h3 className="text-xl font-bold text-slate-900 mb-3">
+                          <h3 className="text-xl font-bold text-white mb-3">
                             {problem.title}
                           </h3>
-                          <p className="text-slate-600 leading-relaxed text-lg">
+                          <p className="text-gray-300 leading-relaxed text-lg">
                             {problem.description}
                           </p>
                         </div>
@@ -379,11 +391,11 @@ const Problem: FC = () => {
 
           <AnimatedWrapper delay={600}>
             <div className="mt-16 text-center">
-              <div className="bg-red-50 border-2 border-red-200 rounded-2xl p-8 max-w-4xl mx-auto">
-                <h3 className="text-2xl font-bold text-red-800 mb-4">
+              <div className="bg-red-500/10 border-2 border-red-500/30 rounded-2xl p-8 max-w-4xl mx-auto">
+                <h3 className="text-2xl font-bold text-red-400 mb-4">
                   Every Day You Wait, You Lose More Customers
                 </h3>
-                <p className="text-lg text-red-700 leading-relaxed">
+                <p className="text-lg text-red-300 leading-relaxed">
                   While you're thinking about it, your competitors are already online capturing the customers that should be yours. 
                   The longer you wait, the further behind you fall.
                 </p>
@@ -420,20 +432,20 @@ const Solution: FC = () => {
   ];
 
   return (
-    <section className="py-20 bg-white relative">
+    <section className="py-20 bg-[#0A0F1E] relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
             <AnimatedWrapper>
-                <div className="inline-flex items-center px-4 py-2 bg-blue-100 border border-blue-200 text-blue-800 rounded-full text-sm font-semibold mb-6">
+                <div className="inline-flex items-center px-4 py-2 bg-[#4F46E5]/20 border border-[#4F46E5]/30 text-[#4F46E5] rounded-full text-sm font-semibold mb-6">
                 <CheckCircle className="w-4 h-4 mr-2" />
                 The Traction Labs Solution
                 </div>
 
-                <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
-                We Make Your Business <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">The Obvious Choice</span>
+                <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                We Make Your Business <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4F46E5] to-[#7C3AED] glow-text">The Obvious Choice</span>
                 </h2>
 
-                <p className="text-xl text-slate-600 mb-8 leading-relaxed">
+                <p className="text-xl text-gray-300 mb-8 leading-relaxed">
                 We don't just build websites. We create a complete digital presence that makes customers choose you over your competitors. From search results to social media, we make sure you look like the professional, trustworthy business you are.
                 </p>
 
@@ -442,14 +454,14 @@ const Solution: FC = () => {
                     const Icon = benefit.icon;
                     return (
                         <div key={index} className="flex items-start space-x-4 group">
-                            <div className="bg-gradient-to-br from-blue-500 to-indigo-600 p-3 rounded-xl flex-shrink-0 shadow-lg">
+                            <div className="icon-gradient p-3 rounded-xl flex-shrink-0 shadow-lg shadow-[#4F46E5]/20">
                                 <Icon className="h-6 w-6 text-white" />
                             </div>
                             <div>
-                                <h3 className="text-xl font-bold text-slate-900 mb-2">
+                                <h3 className="text-xl font-bold text-white mb-2">
                                 {benefit.title}
                                 </h3>
-                                <p className="text-slate-600 leading-relaxed text-lg">
+                                <p className="text-gray-300 leading-relaxed text-lg">
                                 {benefit.description}
                                 </p>
                             </div>
@@ -461,27 +473,27 @@ const Solution: FC = () => {
 
             <AnimatedWrapper delay={200}>
                 <div className="relative">
-                    <div className="bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-3xl p-8 shadow-xl relative overflow-hidden">
+                    <div className="bg-[#1F2937] border-2 border-[#4F46E5]/20 rounded-3xl p-8 shadow-xl relative overflow-hidden">
                     <div className="relative">
                         <div className="flex items-center mb-6">
-                        <TrendingUp className="h-8 w-8 mr-3 text-blue-600" />
-                        <h3 className="text-2xl font-bold text-slate-900">What This Means For You</h3>
+                        <TrendingUp className="h-8 w-8 mr-3 text-[#4F46E5]" />
+                        <h3 className="text-2xl font-bold text-white">What This Means For You</h3>
                         </div>
-                        <div className="space-y-4 text-slate-700">
+                        <div className="space-y-4 text-gray-300">
                         <div className="flex items-start space-x-3">
-                            <ArrowRight className="h-5 w-5 text-blue-500 flex-shrink-0 mt-1" />
+                            <ArrowRight className="h-5 w-5 text-[#4F46E5] flex-shrink-0 mt-1" />
                             <span className="text-lg">Your phone rings with qualified customers ready to buy</span>
                         </div>
                         <div className="flex items-start space-x-3">
-                            <ArrowRight className="h-5 w-5 text-blue-500 flex-shrink-0 mt-1" />
+                            <ArrowRight className="h-5 w-5 text-[#4F46E5] flex-shrink-0 mt-1" />
                             <span className="text-lg">You can charge premium prices because customers trust you</span>
                         </div>
                         <div className="flex items-start space-x-3">
-                            <ArrowRight className="h-5 w-5 text-blue-500 flex-shrink-0 mt-1" />
+                            <ArrowRight className="h-5 w-5 text-[#4F46E5] flex-shrink-0 mt-1" />
                             <span className="text-lg">You spend less time chasing customers and more time serving them</span>
                         </div>
                          <div className="flex items-start space-x-3">
-                            <ArrowRight className="h-5 w-5 text-blue-500 flex-shrink-0 mt-1" />
+                            <ArrowRight className="h-5 w-5 text-[#4F46E5] flex-shrink-0 mt-1" />
                             <span className="text-lg">Your business grows consistently, month after month</span>
                         </div>
                         </div>
@@ -536,13 +548,13 @@ const Services: FC = () => {
   ];
 
   return (
-    <section id="services" className="py-20 gradient-bg">
+    <section id="services" className="py-20 bg-[#1F2937]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <AnimatedWrapper className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Everything You Need to Dominate Your Market
           </h2>
-          <p className="text-xl text-slate-600 max-w-4xl mx-auto leading-relaxed">
+          <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
            We handle all the technical stuff so you can focus on what you do best - running your business.
           </p>
         </AnimatedWrapper>
@@ -552,20 +564,20 @@ const Services: FC = () => {
             const Icon = service.icon;
             return (
                 <AnimatedWrapper key={index} delay={index * 100}>
-                  <div className="professional-card bg-white p-8 rounded-2xl shadow-lg h-full flex flex-col">
-                    <div className="bg-gradient-to-br from-blue-500 to-indigo-600 p-4 rounded-xl w-fit mb-6 shadow-lg">
+                  <div className="dark-professional-card p-8 rounded-2xl shadow-lg h-full flex flex-col">
+                    <div className="icon-gradient p-4 rounded-xl w-fit mb-6 shadow-lg shadow-[#4F46E5]/20">
                       <Icon className="h-7 w-7 text-white" />
                     </div>
-                    <h3 className="text-xl font-bold text-slate-900 mb-3">
+                    <h3 className="text-xl font-bold text-white mb-3">
                       {service.title}
                     </h3>
-                    <p className="text-slate-600 leading-relaxed mb-4 flex-grow text-lg">
+                    <p className="text-gray-300 leading-relaxed mb-4 flex-grow text-lg">
                       {service.description}
                     </p>
                     <div className="space-y-2">
                       {service.features.map((feature, idx) => (
-                        <div key={idx} className="flex items-center text-sm text-slate-600">
-                          <CheckCircle className="h-4 w-4 text-blue-500 mr-2 flex-shrink-0" />
+                        <div key={idx} className="flex items-center text-sm text-gray-400">
+                          <CheckCircle className="h-4 w-4 text-[#4F46E5] mr-2 flex-shrink-0" />
                           {feature}
                         </div>
                       ))}
@@ -609,13 +621,13 @@ const Process: FC = () => {
     ];
 
     return (
-        <section id="process" className="py-20 bg-white relative">
+        <section id="process" className="py-20 bg-[#0A0F1E] relative">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <AnimatedWrapper className="text-center mb-16">
-                    <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+                    <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
                         How We Grow Your Business
                     </h2>
-                    <p className="text-xl text-slate-600 max-w-4xl mx-auto leading-relaxed">
+                    <p className="text-xl text-gray-300 max-w-4xl mx-auto leading-relaxed">
                         Our proven process has helped hundreds of small businesses attract more customers and increase their revenue.
                     </p>
                 </AnimatedWrapper>
@@ -625,15 +637,15 @@ const Process: FC = () => {
                         const Icon = step.icon;
                         return (
                             <AnimatedWrapper key={step.name} delay={index * 150}>
-                                <div className="professional-card bg-white p-8 rounded-2xl shadow-lg h-full">
+                                <div className="dark-professional-card p-8 rounded-2xl shadow-lg h-full">
                                     <div className="flex items-start justify-between mb-4">
-                                        <div className="bg-gradient-to-br from-blue-500 to-indigo-600 p-4 rounded-xl shadow-lg">
+                                        <div className="icon-gradient p-4 rounded-xl shadow-lg shadow-[#4F46E5]/20">
                                             <Icon className="h-8 w-8 text-white" />
                                         </div>
-                                        <span className="text-sm font-bold text-blue-600 bg-blue-100 px-3 py-1 rounded-full">{step.duration}</span>
+                                        <span className="text-sm font-bold text-[#4F46E5] bg-[#4F46E5]/20 px-3 py-1 rounded-full border border-[#4F46E5]/30">{step.duration}</span>
                                     </div>
-                                    <h3 className="text-xl font-bold text-slate-900 mb-3">{step.name}</h3>
-                                    <p className="text-slate-600 leading-relaxed text-lg">{step.description}</p>
+                                    <h3 className="text-xl font-bold text-white mb-3">{step.name}</h3>
+                                    <p className="text-gray-300 leading-relaxed text-lg">{step.description}</p>
                                 </div>
                             </AnimatedWrapper>
                         )
@@ -642,15 +654,15 @@ const Process: FC = () => {
                  
                  <AnimatedWrapper delay={600}>
                      <div className="text-center">
-                         <div className="bg-blue-50 border-2 border-blue-200 rounded-2xl p-8 max-w-3xl mx-auto">
-                             <h3 className="text-2xl font-bold text-blue-800 mb-4">
+                         <div className="bg-[#4F46E5]/10 border-2 border-[#4F46E5]/30 rounded-2xl p-8 max-w-3xl mx-auto">
+                             <h3 className="text-2xl font-bold text-[#4F46E5] mb-4">
                                  Ready to Start Growing?
                              </h3>
-                             <p className="text-lg text-blue-700 mb-6 leading-relaxed">
+                             <p className="text-lg text-gray-300 mb-6 leading-relaxed">
                                  Book your strategy call today and discover exactly how we can help your business attract more customers.
                              </p>
                              <a href={schedulingLink} target="_blank" rel="noopener noreferrer">
-                                 <button className="bg-blue-600 text-white px-8 py-4 rounded-xl hover:bg-blue-700 transition-all shadow-lg font-bold text-lg transform hover:scale-105">
+                                 <button className="bg-[#4F46E5] text-white px-8 py-4 rounded-xl hover:bg-[#3730A3] transition-all shadow-lg shadow-[#4F46E5]/30 font-bold text-lg transform hover:scale-105">
                                      Book a Strategy Call
                                  </button>
                              </a>
@@ -664,11 +676,11 @@ const Process: FC = () => {
 
 const CTA: FC = () => {
     return (
-      <section className="bg-gradient-to-br from-blue-600 to-indigo-700 py-20">
+      <section className="bg-gradient-to-br from-[#4F46E5] to-[#3730A3] py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <AnimatedWrapper>
                 <div className="text-white">
-                    <h2 className="text-4xl md:text-5xl font-bold mb-6">
+                    <h2 className="text-4xl md:text-5xl font-bold mb-6 glow-text">
                         Stop Losing Customers to Your Competition
                     </h2>
                     <p className="text-xl mb-8 leading-relaxed opacity-90">
@@ -678,12 +690,12 @@ const CTA: FC = () => {
 
                     <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
                         <a href={schedulingLink} target="_blank" rel="noopener noreferrer" className="inline-block">
-                            <button className="group bg-white text-blue-600 px-8 py-4 rounded-xl hover:bg-gray-100 transition-all transform hover:scale-105 flex items-center text-xl font-bold shadow-lg mx-auto">
+                            <button className="group bg-white text-[#4F46E5] px-8 py-4 rounded-xl hover:bg-gray-100 transition-all transform hover:scale-105 flex items-center text-xl font-bold shadow-lg mx-auto">
                                 Book a Strategy Call
                                 <ArrowRight className="ml-3 h-6 w-6 group-hover:translate-x-1 transition-transform" />
                             </button>
                         </a>
-                        <button className="group border-2 border-white text-white px-8 py-4 rounded-xl hover:bg-white hover:text-blue-600 transition-all flex items-center text-xl font-bold mx-auto">
+                        <button className="group border-2 border-white text-white px-8 py-4 rounded-xl hover:bg-white hover:text-[#4F46E5] transition-all flex items-center text-xl font-bold mx-auto">
                             <Phone className="mr-3 h-6 w-6" />
                             Call: +91 9321390180
                         </button>
@@ -712,43 +724,43 @@ const CTA: FC = () => {
 
 const Footer: FC = () => {
   return (
-    <footer className="bg-slate-900 text-white py-16">
+    <footer className="bg-[#0A0F1E] text-white py-16 border-t border-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid md:grid-cols-4 gap-8 mb-12">
           <div className="md:col-span-2">
             <div className="flex items-center space-x-3 mb-6">
-              <div className="bg-gradient-to-br from-blue-600 to-indigo-700 p-3 rounded-xl shadow-lg">
+              <div className="icon-gradient p-3 rounded-xl shadow-lg shadow-[#4F46E5]/20">
                 <Zap className="h-7 w-7 text-white" />
               </div>
-              <span className="text-2xl font-bold">Traction Labs</span>
+              <span className="text-2xl font-bold glow-text">Traction Labs</span>
             </div>
-            <p className="text-slate-400 mb-6 max-w-md leading-relaxed text-lg">
+            <p className="text-gray-400 mb-6 max-w-md leading-relaxed text-lg">
               We help small business owners build a powerful digital presence that attracts customers, builds trust, and drives growth.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="bg-slate-800 p-3 rounded-xl hover:bg-blue-600 transition-all">
+              <a href="#" className="bg-[#1F2937] p-3 rounded-xl hover:bg-[#4F46E5] transition-all border border-gray-700 hover:border-[#4F46E5]">
                 <Linkedin className="h-6 w-6" />
               </a>
-              <a href="#" className="bg-slate-800 p-3 rounded-xl hover:bg-blue-600 transition-all">
+              <a href="#" className="bg-[#1F2937] p-3 rounded-xl hover:bg-[#4F46E5] transition-all border border-gray-700 hover:border-[#4F46E5]">
                 <Twitter className="h-6 w-6" />
               </a>
             </div>
           </div>
           
           <div>
-            <h3 className="text-lg font-bold mb-4 text-blue-400">Services</h3>
-            <ul className="space-y-3 text-slate-400">
-              <li><a href="#" className="hover:text-blue-400 transition-colors">Website Design</a></li>
-              <li><a href="#" className="hover:text-blue-400 transition-colors">Local SEO</a></li>
-              <li><a href="#" className="hover:text-blue-400 transition-colors">Reputation Management</a></li>
-              <li><a href="#" className="hover:text-blue-400 transition-colors">Social Media</a></li>
-              <li><a href="#" className="hover:text-blue-400 transition-colors">Digital Advertising</a></li>
+            <h3 className="text-lg font-bold mb-4 text-[#4F46E5]">Services</h3>
+            <ul className="space-y-3 text-gray-400">
+              <li><a href="#" className="hover:text-[#4F46E5] transition-colors">Website Design</a></li>
+              <li><a href="#" className="hover:text-[#4F46E5] transition-colors">Local SEO</a></li>
+              <li><a href="#" className="hover:text-[#4F46E5] transition-colors">Reputation Management</a></li>
+              <li><a href="#" className="hover:text-[#4F46E5] transition-colors">Social Media</a></li>
+              <li><a href="#" className="hover:text-[#4F46E5] transition-colors">Digital Advertising</a></li>
             </ul>
           </div>
           
           <div>
-            <h3 className="text-lg font-bold mb-4 text-blue-400">Contact</h3>
-            <ul className="space-y-3 text-slate-400">
+            <h3 className="text-lg font-bold mb-4 text-[#4F46E5]">Contact</h3>
+            <ul className="space-y-3 text-gray-400">
               <li className="flex items-center space-x-2">
                 <Mail className="h-5 w-5" />
                 <span>rohanvyas@tractionlabs.in</span>
@@ -765,14 +777,14 @@ const Footer: FC = () => {
           </div>
         </div>
         
-        <div className="border-t border-slate-800 pt-8">
+        <div className="border-t border-gray-800 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-slate-400 text-sm mb-4 md:mb-0">
+            <p className="text-gray-400 text-sm mb-4 md:mb-0">
               © 2024 Traction Labs. All rights reserved.
             </p>
-            <div className="flex space-x-6 text-sm text-slate-400">
-              <a href="#" className="hover:text-blue-400 transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-blue-400 transition-colors">Terms of Service</a>
+            <div className="flex space-x-6 text-sm text-gray-400">
+              <a href="#" className="hover:text-[#4F46E5] transition-colors">Privacy Policy</a>
+              <a href="#" className="hover:text-[#4F46E5] transition-colors">Terms of Service</a>
             </div>
           </div>
         </div>
