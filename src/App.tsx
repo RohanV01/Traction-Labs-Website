@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, FC, ReactNode } from 'react';
-import { Zap, Menu, X, ArrowRight, CheckCircle, Target, Users, GraduationCap, Search, MessageSquare, Calendar, Linkedin, Twitter, HelpCircle, Clock, TrendingDown, Mail, FileText, Rocket, Satellite, Award, Sparkles, TrendingUp, LucideCrop as LucideProps, Database, BarChart2, Key, Download, Globe, Smartphone, Camera, Share2, Star, Monitor, Palette, ShoppingBag, Phone, MapPin, Shield, Building2, Wrench, Stethoscope, Home, Eye, DollarSign, ThumbsUp, Briefcase } from 'lucide-react';
+import { Menu, X, ArrowRight, CheckCircle, Target, Users, GraduationCap, Search, MessageSquare, Calendar, Linkedin, Twitter, HelpCircle, Clock, TrendingDown, Mail, FileText, Rocket, Satellite, Award, Sparkles, TrendingUp, LucideCrop as LucideProps, Database, BarChart2, Key, Download, Globe, Smartphone, Camera, Share2, Star, Monitor, Palette, ShoppingBag, Phone, MapPin, Shield, Building2, Wrench, Stethoscope, Home, Eye, DollarSign, ThumbsUp, Briefcase } from 'lucide-react';
 
 // === CONFIGURATION: Add your scheduling link here ===
 const schedulingLink = "https://calendar.app.google/juqLpxppzGjEkJic8";
@@ -171,9 +171,7 @@ const Header: FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <a href="#" onClick={(e) => handleNavClick(e, '#')} className="flex items-center space-x-3">
-            <div className="icon-gradient p-3 rounded-xl shadow-lg shadow-[#4F46E5]/20">
-              <img src="/traction_labs_logo.png" alt="Traction Labs Logo" className="logo-image" />
-            </div>
+            <img src="/traction_labs_logo.png" alt="Traction Labs Logo" className="logo-image" />
             <span className="text-2xl font-bold text-white glow-text">
               Traction Labs
             </span>
@@ -736,9 +734,7 @@ const Footer: FC = () => {
         <div className="grid md:grid-cols-4 gap-8 mb-12">
           <div className="md:col-span-2">
             <div className="flex items-center space-x-3 mb-6">
-              <div className="icon-gradient p-3 rounded-xl shadow-lg shadow-[#4F46E5]/20">
-                <img src="/traction_labs_logo.png" alt="Traction Labs Logo" className="logo-image" />
-              </div>
+              <img src="/traction_labs_logo.png" alt="Traction Labs Logo" className="logo-image" />
               <span className="text-2xl font-bold glow-text">Traction Labs</span>
             </div>
             <p className="text-gray-400 mb-6 max-w-md leading-relaxed text-lg">
