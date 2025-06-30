@@ -229,7 +229,7 @@ const BusinessGrowthChart: FC = () => {
         { name: 'Get Discovered', icon: Eye, color: 'bg-[#4F46E5]', description: 'Customers find your business online' },
         { name: 'Build Trust', icon: Shield, color: 'bg-[#059669]', description: 'Professional presence builds credibility' },
         { name: 'Generate Leads', icon: Zap, color: 'bg-[#DC2626]', description: 'More inquiries and opportunities' },
-        { name: 'Scale Smart', icon: TrendingUp, color: 'bg-[#7C3AED]', description: 'Sustainable business growth' },
+        { name: 'Increase Revenue', icon: DollarSign, color: 'bg-[#7C3AED]', description: 'Sustainable business growth' },
     ];
 
     return (
@@ -238,7 +238,7 @@ const BusinessGrowthChart: FC = () => {
                 <h3 className="text-2xl font-bold text-white text-center mb-8">Your Smart Growth Path</h3>
                 <div className="space-y-6">
                     {stages.map((stage, index) => {
-                        const isPulsing = stage.name === 'Scale Smart';
+                        const isPulsing = stage.name === 'Increase Revenue';
                         const isActive = activeStage === stage.name || isPulsing;
                         const Icon = stage.icon;
 
@@ -282,9 +282,9 @@ const Hero: FC = () => {
             <div className="lg:grid lg:grid-cols-2 lg:gap-16 items-center">
                 <div className="text-center lg:text-left z-10 relative">
                     <AnimatedWrapper>
-                      <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4F46E5] to-[#7C3AED] glow-text">Grow your small business</span><br/>
-                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4F46E5] to-[#7C3AED] glow-text">- the smart way</span>
+                      <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                        <span className="text-white">Grow Your Small Business</span><br/>
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#4F46E5] to-[#7C3AED] glow-text">- The Smart Way</span>
                       </h1>
                       <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
                         We help small businesses across India get found online, build trust with customers, and grow sustainably without the complexity or massive budgets.
